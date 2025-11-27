@@ -5,6 +5,7 @@ from resources.TeamMembers import TeamMemberList, SpecificTeamMember
 from resources.Solutions import SolutionsList, SpecificSolution
 from resources.Products import ProductsList, SpecificProduct
 from resources.Donors import DonorList, SpecificDonor
+from resources.SustainableUn import SustainableUnList, SpecificSustainableUn
 
 api.add_resource(TeamsList, "/teams")
 api.add_resource(SpecificTeam, "/teams/<int:id>")
@@ -20,6 +21,9 @@ api.add_resource(SpecificProduct, "/products/<int:id>")
 
 api.add_resource(DonorList, "/donors")
 api.add_resource(SpecificDonor, "/donors/<int:id>")
+
+api.add_resource(SustainableUnList, "/sustainabilities")
+api.add_resource(SpecificSustainableUn, "/sustainabilities/<int:id>")
 
 if __name__ == "__main__":
     app.run(port = 5555, debug = True)
