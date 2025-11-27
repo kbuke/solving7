@@ -11,6 +11,13 @@ class SolutionsModel(db.Model, SerializerMixin):
     intro = db.Column(db.String, nullable = True)
     img = db.Column(db.String)
 
+    # RELATIONSHIPS
+    products = db.relationship("ProductsModel", back_populates = "solution")
+
+    serialize_rules = (
+        "-products.solution",
+    )
+
     # VALIDATIONS
         # Ensure solution is valid, and unique
     @validates("solution")
