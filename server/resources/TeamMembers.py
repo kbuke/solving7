@@ -9,7 +9,8 @@ class TeamMemberList(BaseResource):
         "img": "img",
         "position": "position",
         "intro": "intro",
-        "email": "email"
+        "email": "email",
+        "teamId": "team_id"
     }
 
     def get(self):

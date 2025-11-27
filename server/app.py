@@ -1,6 +1,10 @@
-from config import app, api
+from config import app, api, db
 
-from resources.Team import TeamMemberList, SpecificTeamMember
+from resources.Teams import TeamsList, SpecificTeam
+from resources.TeamMembers import TeamMemberList, SpecificTeamMember
+
+api.add_resource(TeamsList, "/teams")
+api.add_resource(SpecificTeam, "/teams/<int:id>")
 
 api.add_resource(TeamMemberList, "/teammember")
 api.add_resource(SpecificTeamMember, "/teammember/<int:id>")
