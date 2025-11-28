@@ -14,8 +14,12 @@ class SolutionsModel(db.Model, SerializerMixin):
     # RELATIONSHIPS
     products = db.relationship("ProductsModel", back_populates = "solution")
 
+    sustainable_goals = db.relationship("SustainableUnModel", back_populates = "solutions", secondary = "sustainable_solutions")
+
     serialize_rules = (
         "-products.solution",
+
+        "-sustainable_goals.solutions",
     )
 
     # VALIDATIONS

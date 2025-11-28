@@ -11,6 +11,13 @@ class SustainableUnModel(db.Model, SerializerMixin):
     logo = db.Column(db.String, nullable = True)
     img = db.Column(db.String, nullable = True)
     info = db.Column(db.String, nullable = True)
+
+    # RELATIONSHIPS
+    solutions = db.relationship("SolutionsModel", back_populates = "sustainable_goals", secondary = "sustainable_solutions")
+
+    serialize_rules = (
+        "-solutions.sustainable_goals",
+    )
     
     # VALIDATE
     @validates("goal")

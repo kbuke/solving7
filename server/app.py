@@ -7,6 +7,7 @@ from resources.Products import ProductsList, SpecificProduct
 from resources.Donors import DonorList, SpecificDonor
 from resources.SustainableUn import SustainableUnList, SpecificSustainableUn
 from resources.HomeSections import HomeSectionList, SpecificHomeSection
+from resources.SustainableSolutions import SustainableSolutionsList, SpecificSustainableSolutions
 
 api.add_resource(TeamsList, "/teams")
 api.add_resource(SpecificTeam, "/teams/<int:id>")
@@ -28,6 +29,9 @@ api.add_resource(SpecificSustainableUn, "/sustainabilities/<int:id>")
 
 api.add_resource(HomeSectionList, "/homesection")
 api.add_resource(SpecificHomeSection, "/homesection/<int:id>")
+
+api.add_resource(SustainableSolutionsList, "/sustainablesolutions")
+api.add_resource(SpecificSustainableSolutions, "/sustainablesolutions/<int:id>")
 
 if __name__ == "__main__":
     app.run(port = 5555, debug = True)
