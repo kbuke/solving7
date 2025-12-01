@@ -72,7 +72,10 @@ export function AdminTeam({
                             errors={errors}
                             reset={reset}
                         />
-                        : <DeleteTeam />
+                        : <DeleteTeam 
+                            deletePatchTeam={deletePatchTeam}
+                            handleSubmit={handleSubmit}
+                        />
                     }
                 </div>
                 : null
