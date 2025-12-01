@@ -34,7 +34,8 @@ function App() {
             allProducts: allProducts, setAllProducts: setAllProducts,
             allSustainableSolutions: allSustainableSolutions, setAllSustainableSolutions,
             allTeams: allTeams, setAllTeams: setAllTeams,
-            allUNSustainableGoals: allUNSustainableGoals, setAllUNSustainableGoals: setAllUNSustainableGoals
+            allUNSustainableGoals: allUNSustainableGoals, setAllUNSustainableGoals: setAllUNSustainableGoals,
+            allTeamMembers: allTeamMembers, setAllTeamMembers: setAllTeamMembers
           }
         }
       />

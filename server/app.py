@@ -8,6 +8,9 @@ from resources.Donors import DonorList, SpecificDonor
 from resources.SustainableUn import SustainableUnList, SpecificSustainableUn
 from resources.HomeSections import HomeSectionList, SpecificHomeSection
 from resources.SustainableSolutions import SustainableSolutionsList, SpecificSustainableSolutions
+from resources.Login import Login
+from resources.LogOut import Logout
+from resources.CheckSession import CheckSession
 
 api.add_resource(TeamsList, "/teams")
 api.add_resource(SpecificTeam, "/teams/<int:id>")
@@ -32,6 +35,12 @@ api.add_resource(SpecificHomeSection, "/homesection/<int:id>")
 
 api.add_resource(SustainableSolutionsList, "/sustainablesolutions")
 api.add_resource(SpecificSustainableSolutions, "/sustainablesolutions/<int:id>")
+
+api.add_resource(CheckSession, "/session")
+
+api.add_resource(Login, "/login")
+
+api.add_resource(Logout, "/logout")
 
 if __name__ == "__main__":
     app.run(port = 5555, debug = True)
