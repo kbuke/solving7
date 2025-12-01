@@ -1,0 +1,40 @@
+.admin-nav-bar{
+    width: 100vw;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 100;
+    position: sticky;
+    background-color: black;
+    color: white;
+    justify-content: space-around;
+}
+
+.logged-user-img{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+.admin-nav-button{
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: solid;
+    height: 80px;
+    width: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.3rem;
+    font-size: 30px;
+
+    transition: all 0.3s;
+
+    background-color: black;
+}
+
+.admin-nav-button:hover{
+    width: 200px;
+    letter-spacing: 2px;
+}

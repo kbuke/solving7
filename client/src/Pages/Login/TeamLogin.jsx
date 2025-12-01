@@ -59,7 +59,7 @@ export function TeamLogin(){
 
             const data = await res.json()
             
-            navigate("/")
+            navigate("/admin")
         } catch(err) {
             setError("Server unreachable. Make sure Flask is running on port 5555")
         } finally {

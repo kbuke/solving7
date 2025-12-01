@@ -4,6 +4,8 @@ import { useState } from "react"
 import { useFetch } from "./Requests/useFetch"
 import { Outlet } from "react-router"
 
+import { FormGroup } from "./Components/FormGroup"
+
 function App() {
   const [loading, setLoading] = useState(false)
   const [allSolutions, setAllSolutions] = useState([])
@@ -14,6 +16,9 @@ function App() {
   const [allTeams, setAllTeams] = useState([])
   const [allTeamMembers, setAllTeamMembers] = useState([])
   const [allDonors, setAllDonors] = useState([])
+  const [loggedUser, setLoggedUser] = useState([])
+
+  useFetch("/api/session", setLoggedUser)
 
   useFetch("/api/teams", setAllTeams)
   useFetch("/api/teammember", setAllTeamMembers)
@@ -23,6 +28,44 @@ function App() {
   useFetch("/api/sustainabilities", setAllUNSustainableGoals)
   useFetch("/api/homesection", setAllHomeSections)
   useFetch("/api/sustainablesolutions", setAllSustainableSolutions)
+
+  const inputContainer = (label, type, placeholder, register, errorMessage) => {
+    return(
+            <div
+                className="form-input-div"
+            >
+                <div
+                    className="form-input-grid"
+                >
+                    <label
+                        className="form-input-label"
+                    >
+                        {label}
+                    </label>
+
+                    {type === "textarea"
+                        ? <textarea 
+                            className="form-text-area"
+                            type={type}
+                            placeholder={placeholder}
+                            {...register}
+                        />
+                    :
+                        <input 
+                            type={type}
+                            placeholder={placeholder}
+                            {...register}
+                        />
+                    }
+                </div>
+                {errorMessage ?
+                    <FormGroup errorMessage={errorMessage}/>
+                    :
+                    null
+                }
+            </div>
+        )
+  }
 
   return(
     <>
@@ -35,7 +78,9 @@ function App() {
             allSustainableSolutions: allSustainableSolutions, setAllSustainableSolutions,
             allTeams: allTeams, setAllTeams: setAllTeams,
             allUNSustainableGoals: allUNSustainableGoals, setAllUNSustainableGoals: setAllUNSustainableGoals,
-            allTeamMembers: allTeamMembers, setAllTeamMembers: setAllTeamMembers
+            allTeamMembers: allTeamMembers, setAllTeamMembers: setAllTeamMembers,
+            loggedUser: loggedUser, setLoggedUser: setLoggedUser,
+            inputContainer: inputContainer
           }
         }
       />

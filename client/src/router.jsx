@@ -1,7 +1,8 @@
 import { createBrowserRouter, Navigate } from "react-router";
 import { Home } from "./Pages/Home/Home";
 import App from "./App";
-import { TeamLogin } from "./Pages/Admin/TeamLogin";
+import { TeamLogin } from "./Pages/Login/TeamLogin";
+import { AdminPg } from "./Pages/Admin/AdminPg";
 
 
 export const router = createBrowserRouter([
@@ -16,6 +17,10 @@ export const router = createBrowserRouter([
             {
                 path: "teamlogin",
                 element: <TeamLogin />
+            },
+            {
+                path: "admin",
+                element: <AdminPg />
             },
             {
                 path: "*",

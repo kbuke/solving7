@@ -15,6 +15,10 @@ p{
     font-size: 22px;
 }
 
+button{
+    cursor: pointer;
+}
+
 .secondary-header{
     text-transform: uppercase;
     font-size: 40px;
@@ -49,6 +53,108 @@ p{
     transform: translateY(-9px);
     box-shadow: 3px 2px 15px black;
 }
+
+.popup-container{
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1000;
+    background-color: hsla(0, 0%, 0%, 40%);
+    display: flex;
+    justify-content: center;
+}
+
+.popup-form{
+    display: flex;
+    flex-direction: column;
+
+    justify-self: center;
+    align-self: center;
+    
+    height: 90%;
+    width: 90%;
+
+    border-radius: 0.3em;
+
+    background-image: linear-gradient(
+        to right bottom,
+        hsl(0, 1%, 49%),
+        hsl(0, 2%, 11%)
+    );
+
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+}
+
+.form-input-div{
+    width: 80%;
+    padding: 1%;
+    margin-bottom: 1%;
+    color: white;
+    border-bottom: solid 1px white;
+    text-align: center;
+}
+
+.form-input-grid{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    gap: 10%;
+}
+
+.form-text-area{
+    height: 120px;
+    text-align: left;
+}
+
+.form-input-label{
+    font-weight: bold;
+}
+
+.form-button-container{
+    display: flex;
+    gap: 20px;
+}
+
+.form-button{
+    height: 40px;
+    width: 150px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    transition: all 0.3s;
+
+    color: white;
+    border-radius: 0.3rem;
+    border: none;
+}
+
+.form-button:hover{
+    transform: translateY(-5px);
+}
+
+.form-submit-button{
+    background-image: linear-gradient(
+        to right,
+        hsl(109, 77%, 39%),
+        hsl(120, 85%, 24%)
+    );
+}
+
+.form-cancel-button{
+   background-image: linear-gradient(
+        to right,
+        hsl(0, 85%, 52%),
+        hsl(0, 98%, 32%)
+    ); 
+}
+
+
 
 
 

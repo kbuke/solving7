@@ -1,0 +1,52 @@
+.admin-table{
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.table-header{
+    background-color: black;
+    width: 100%;
+    border: solid;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.table-rows td{
+    border-bottom: solid 1px black;
+    vertical-align: middle;
+    padding: 1%;
+}
+
+
+.table-button-container{
+    display: flex;
+    gap: 5%;
+    justify-content: center;
+}
+
+.admin-table-button{
+    width: 35%;
+    height: 30px;
+    border: none;
+    border-radius: 3rem;
+    text-transform: uppercase;
+    color: white;
+}
+
+.edit-table-button{
+    background-image: linear-gradient(
+        to right,
+        hsl(204, 47%, 48%),
+        hsl(229, 54%, 50%)
+    );
+}
+
+.delete-table-button{
+    background-image: linear-gradient(
+        to right,
+        hsl(1, 65%, 63%),
+        hsl(0, 85%, 55%)
+    );
+}
