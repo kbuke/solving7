@@ -2,6 +2,7 @@ import "./App.css"
 
 import { useState } from "react"
 import { useFetch } from "./Requests/useFetch"
+import { Outlet } from "react-router"
 
 function App() {
   const [loading, setLoading] = useState(false)
@@ -23,7 +24,22 @@ function App() {
   useFetch("/api/homesection", setAllHomeSections)
   useFetch("/api/sustainablesolutions", setAllSustainableSolutions)
 
-  console.log(allSolutions)
+  return(
+    <>
+      <Outlet 
+        context={
+          {
+            allSolutions: allSolutions, setAllSolutions: setAllSolutions,
+            allHomeSections: allHomeSections, setAllHomeSections: setAllHomeSections,
+            allProducts: allProducts, setAllProducts: setAllProducts,
+            allSustainableSolutions: allSustainableSolutions, setAllSustainableSolutions,
+            allTeams: allTeams, setAllTeams: setAllTeams,
+            allUNSustainableGoals: allUNSustainableGoals, setAllUNSustainableGoals: setAllUNSustainableGoals
+          }
+        }
+      />
+    </>
+  )
 }
 
 export default App

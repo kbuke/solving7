@@ -55,7 +55,7 @@ class BaseResource(Resource):
                 mapped_data[mapped_key] = value
 
             for attr, val in mapped_data.items():
-                setattr(record, attr, value)
+                setattr(record, attr, val)
             
             db.session.commit()
             return make_response(record.to_dict(), 202)

@@ -16,8 +16,8 @@ class TeamsModel(db.Model, SerializerMixin):
 
     serialize_rules = (
         "-members.team",
-        "-members.id",
         "-members.team_id",
+        "-members._password_hash"
     )
     
     # SET UP VALIDATIONS

@@ -8,7 +8,8 @@ class HomeSectionList(BaseResource):
         "homeSectionHeading": "heading",
         "homeSectionText": "text",
         "homeSectionImg1": "img_1",
-        "homeSectionImg2": "img_2"
+        "homeSectionImg2": "img_2",
+        "accessor": "accessor"
     }
 
     def get(self):
@@ -24,7 +25,8 @@ class SpecificHomeSection(BaseResource):
         "homeSectionHeading": "heading",
         "homeSectionText": "text",
         "homeSectionImg1": "img_1",
-        "homeSectionImg2": "img_2"
+        "homeSectionImg2": "img_2",
+        "accessor": "accessor"
     }
 
     def get(self, id):

@@ -10,7 +10,8 @@ class TeamMemberList(BaseResource):
         "position": "position",
         "intro": "intro",
         "email": "email",
-        "teamId": "team_id"
+        "teamId": "team_id",
+        "userPassword": "password_hash"
     }
 
     def get(self):
@@ -27,7 +28,8 @@ class SpecificTeamMember(BaseResource):
         "img": "img",
         "position": "position",
         "intro": "intro",
-        "email": "email"
+        "email": "email",
+        "userPassword": "password_hash"
     }
 
     def get(self, id):

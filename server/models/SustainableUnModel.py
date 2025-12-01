@@ -40,7 +40,7 @@ class SustainableUnModel(db.Model, SerializerMixin):
         
         # 4 - Check that there are not more than 17 goals
         count = SustainableUnModel.query.count()
-        if self.id is None and count >= 16:
+        if self.id is None and count >= 17:
             raise ValueError("There are only 17 UN Sustainable Goals")
         
         return value

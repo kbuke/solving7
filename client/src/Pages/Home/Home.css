@@ -1,0 +1,11 @@
+.home-pg-cover{
+    width: 100vw;
+    height: 80vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.pg-info-container{
+    margin: 10px 30px;
+}

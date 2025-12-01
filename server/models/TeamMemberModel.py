@@ -1,9 +1,10 @@
 from sqlalchemy.orm import validates
 from sqlalchemy_serializer import SerializerMixin
+from sqlalchemy.ext.hybrid import hybrid_property
 
 from models.TeamsModel import TeamsModel
 
-from config import db 
+from config import db, bcrypt
 import re
 
 class TeamMemberModel(db.Model, SerializerMixin):
@@ -15,13 +16,14 @@ class TeamMemberModel(db.Model, SerializerMixin):
     position = db.Column(db.String, nullable = False)
     intro = db.Column(db.String, nullable = False)
     email = db.Column(db.String, nullable = True)
+    _password_hash = db.Column(db.String, nullable = False, server_default = "")
 
     # Set up relationship with teams
     team_id = db.Column(db.ForeignKey("teams.id"))
     team = db.relationship("TeamsModel", back_populates = "members")
 
     serialize_rules = (
-        "-team",
+        "-team.members",
     )
 
     # VALIDATIONS
@@ -53,3 +55,25 @@ class TeamMemberModel(db.Model, SerializerMixin):
         existing_team = TeamsModel.query.filter(TeamsModel.id == value).first()
         if not existing_team:
             raise ValueError(f"Team {value} is not registered on the app.")
+        
+        return value
+    
+        # Validate password
+    @hybrid_property
+    def password_hash(self):
+        raise AttributeError("password: write-only attribute")
+    
+    @password_hash.setter
+    def password_hash(self, password):
+        self._password_hash = bcrypt.generate_password_hash(password).decode("utf-8")
+    
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(self._password_hash, password)
+    
+    def __init__(self, **kwargs):
+        password = kwargs.pop("password_hash", None)
+        super().__init__(**kwargs)
+
+        if password:
+            self.password_hash = password
+    
