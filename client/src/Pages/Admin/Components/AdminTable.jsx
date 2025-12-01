@@ -25,11 +25,13 @@ export function AdminTable({
     return(
         <table className="admin-table">
             <thead className="table-header">
-                {tableHeadings?.map((heading, index) => (
-                    <th key={index}>
-                        {heading.header}
-                    </th>
-                ))}
+                <tr>
+                    {tableHeadings?.map((heading, index) => (
+                        <th key={index}>
+                            {heading.header}
+                        </th>
+                    ))}
+                </tr>
             </thead>
 
             <tbody>

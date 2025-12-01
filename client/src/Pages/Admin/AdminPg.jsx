@@ -8,8 +8,6 @@ export function AdminPg(){
     const loggedUser = appData?.loggedUser
     const setLoggedUser = appData?.setLoggedUser
 
-
-    console.log(loggedUser)
     return(
         loggedUser
             ? <div>

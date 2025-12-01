@@ -15,13 +15,12 @@ export function AdminTeam({
     const {
         register,
         handleSubmit,
-        formState: {errors}
+        formState: {errors},
+        reset
     } = useForm()
 
     const allTeams = appData.allTeams
     const setAllTeams = appData.setAllTeams
-
-    console.log(allTeams)
 
     const teamHeadings = [
         {
@@ -64,8 +63,15 @@ export function AdminTeam({
                             setTeamAction={setTeamAction}
                             inputContainer={appData?.inputContainer}
                         />
-                        : teamAction === "edit"
-                        ? <PatchTeam />
+                        : teamAction === "Edit"
+                        ? <PatchTeam 
+                            deletePatchTeam={deletePatchTeam}
+                            inputContainer={appData?.inputContainer}
+                            register={register}
+                            handleSubmit={handleSubmit}
+                            errors={errors}
+                            reset={reset}
+                        />
                         : <DeleteTeam />
                     }
                 </div>
