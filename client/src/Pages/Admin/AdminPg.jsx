@@ -3,6 +3,7 @@ import { AdminNav } from "./Sections/AdminNav"
 import { AdminTeam } from "./Sections/Teams/AdminTeam"
 import { AdminGoals } from "./Sections/Goals/AdminGoals"
 import { useForm } from "react-hook-form"
+import { AdminHomeSection } from "./Sections/HomeSections/AdminHomeSection"
 
 export function AdminPg(){
     const appData = useOutletContext()
@@ -23,6 +24,14 @@ export function AdminPg(){
                 <AdminNav 
                     loggedUser={loggedUser}
                     setLoggedUser={setLoggedUser}
+                />
+
+                <AdminHomeSection 
+                    appData={appData}
+                    register={register}
+                    handleSubmit={handleSubmit}
+                    errors={errors}
+                    reset={reset}
                 />
 
                 <AdminTeam 

@@ -40,6 +40,7 @@ export function PostPatchGoal({
                                     solution => 
                                         solution?.solution.toLowerCase() === value?.toLowerCase()
                                 )
+                                return !errors || `${value} already registered goal`
                             }
                         }
                     )},

@@ -29,8 +29,6 @@ function App() {
   useFetch("/api/homesection", setAllHomeSections)
   useFetch("/api/sustainablesolutions", setAllSustainableSolutions)
 
-  console.log(loggedUser)
-
   const inputContainer = (label, type, placeholder, register, errorMessage) => {
     return(
             <div

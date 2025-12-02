@@ -19,8 +19,6 @@ export function AdminGoals({
     const allSolutions = appData.allSolutions
     const setAllSolutions = appData.setAllSolutions
 
-    console.log(allSolutions)
-
     const solutionHeadings = [
         {
             header: "Solution", accessor: "solution"
@@ -66,8 +64,15 @@ export function AdminGoals({
                             setSolutionAction={setSolutionAction}
                             inputContainer={appData?.inputContainer}
                         />
-                        : solutionAction === "edit"
-                        ? <PatchGoal />
+                        : solutionAction === "Edit"
+                        ? <PatchGoal 
+                            deletePatchGoal={deletePatchGoal}
+                            inputContainer={appData?.inputContainer}
+                            register={register}
+                            handleSubmit={handleSubmit}
+                            errors={errors}
+                            reset={reset}
+                        />
                         :
                         <DeleteGoal 
                             deletePatchGoal={deletePatchGoal}

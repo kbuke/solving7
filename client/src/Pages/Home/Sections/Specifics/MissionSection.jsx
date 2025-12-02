@@ -1,71 +1,62 @@
+import { useState } from "react"
 import "./MissionSection.css"
 
 export function MissionSection({
     appData
 }){
+    const [hoverSolutionId, setHoverSolutionId] = useState()
+
     const allSolutions = appData?.allSolutions
 
-    const solutionInfo = (solution, info, products) => {
-        return(
-            <div>
-                <h2 className="secondary-header">
-                    {solution}
-                </h2>
+    console.log(allSolutions)
 
-                <p>{info}</p>
-                
-                {products 
-                    ? <button className="user-button">
-                        {products}
-                    </button>
-                    : null
-                }
-            </div>
-        )
-    }
+    const generateColumns = () => {
+        if(!hoverSolutionId){
+            return "1fr 1fr 1fr 1fr 1fr 1fr 1fr"
+        }
 
-    const solutionImg = (image, imgText) => {
-        return(
-            <img 
-                src={image}
-                alt={imgText}
-                className="solution-img"
-            />
+        return allSolutions.map(solution => 
+            solution.id === hoverSolutionId ? "70fr" : "5fr"
         )
+        .join(" ")
     }
 
     return(
-        allSolutions.map((solution, index) => (
-            solution?.id % 2 !== 0?
-                <div key={index} className="left-solution-grid">
-                    {solutionInfo(
-                        `${solution?.id}. ${solution?.solution}`,
-                        solution?.intro,
-                        solution.products.length > 0
-                            ? "Solution"
-                            : null
-                    )}
+        <div className="solution-grid" style={{"--columns": generateColumns()}}>
+            {allSolutions.map((solution, index) => (
+                <div
+                    className={`solution-card ${
+                        hoverSolutionId && hoverSolutionId===solution?.id
+                            ?"selected-solution" : "unselected-solution"
+                        }`}
+                    key={index}
+                    style={{
+                        backgroundImage: `url(${solution?.img})`
+                    }}
+                    onMouseEnter={() => setHoverSolutionId(solution?.id)}
+                    onMouseLeave={() => setHoverSolutionId(null)}
+                >
+                    {
+                        hoverSolutionId !== solution.id 
+                            ? <div
+                                className="solution-id-cover"
+                            >
+                                <h1>
+                                    Solution | {solution?.id}
+                                </h1>
+                            </div>
+                            : <div className="solution-text-container">
+                                <h1>
+                                    {solution?.id} - {solution?.solution}
+                                </h1>
 
-                    {solutionImg(
-                        solution?.img,
-                        `Solution ${solution?.id} img`
-                    )}
+                                <p>
+                                    {solution?.intro}
+                                </p>
+                            </div>
+                    }
                 </div>
-                :
-                <div key={index} className="right-solution-grid">
-                    {solutionImg(
-                        solution?.img,
-                        `Solution ${solution?.id} img`
-                    )}
-
-                    {solutionInfo(
-                        `${solution?.id}. ${solution?.solution}`,
-                        solution?.intro,
-                        solution.products.length > 0
-                            ? "Solution"
-                            : null
-                    )}
-                </div>
-        ))
+            ))}
+        </div>
     )
 }
