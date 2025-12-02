@@ -6,18 +6,15 @@ import { PatchTeam } from "./CrudActions/PatchTeam"
 import { DeleteTeam } from "./CrudActions/DeleteTeam"
 
 export function AdminTeam({
-    appData
+    appData,
+    register,
+    handleSubmit,
+    errors,
+    reset
 }){
     const [teamAction, setTeamAction] = useState()
     const [selectedTeamId, setSelectedTeamId] = useState()
     const [selectedTeamName, setSelectedTeamName] = useState()
-
-    const {
-        register,
-        handleSubmit,
-        formState: {errors},
-        reset
-    } = useForm()
 
     const allTeams = appData.allTeams
     const setAllTeams = appData.setAllTeams

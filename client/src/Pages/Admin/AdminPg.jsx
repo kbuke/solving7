@@ -1,12 +1,21 @@
 import { useOutletContext } from "react-router"
 import { AdminNav } from "./Sections/AdminNav"
 import { AdminTeam } from "./Sections/Teams/AdminTeam"
+import { AdminGoals } from "./Sections/Goals/AdminGoals"
+import { useForm } from "react-hook-form"
 
 export function AdminPg(){
     const appData = useOutletContext()
 
     const loggedUser = appData?.loggedUser
     const setLoggedUser = appData?.setLoggedUser
+
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+        reset
+    } = useForm()
 
     return(
         loggedUser
@@ -18,6 +27,18 @@ export function AdminPg(){
 
                 <AdminTeam 
                     appData={appData}
+                    register={register}
+                    handleSubmit={handleSubmit}
+                    errors={errors}
+                    reset={reset}
+                />
+
+                <AdminGoals 
+                    appData={appData}
+                    register={register}
+                    handleSubmit={handleSubmit}
+                    errors={errors}
+                    reset={reset}
                 />
             </div>
             :

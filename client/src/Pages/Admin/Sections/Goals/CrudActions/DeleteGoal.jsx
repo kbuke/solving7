@@ -1,25 +1,25 @@
 import { useDelete } from "../../../../../Requests/useDelete"
 
-export function DeleteTeam({
-    deletePatchTeam,
+export function DeleteGoal({
+    deletePatchGoal,
     handleSubmit
 }){
     const handleDeleteTeam = () => {
         useDelete(
-            `/api/teams/${deletePatchTeam?.selectedTeamId}`,
-            deletePatchTeam.setAllTeams,
-            deletePatchTeam.selectedTeamId,
-            deletePatchTeam.setTeamAction
+            `/api/solutions/${deletePatchGoal?.selectedSolutionId}`,
+            deletePatchGoal.setAllSolutions,
+            deletePatchGoal.selectedSolutionId,
+            deletePatchGoal.setSolutionAction
         )
     }
 
     return(
         <form
-            onSubmit={handleSubmit(handleDeleteTeam)}
             className="admin-form popup-form"
+            onSubmit={handleSubmit(handleDeleteTeam)}
         >
             <h1>
-                Confirm Deletion of Team: {deletePatchTeam.selectedTeamName}
+                Confirm Deletion of Solution: {deletePatchGoal.selectedSolutionName}
             </h1>
 
             <div className="form-button-container">
@@ -29,7 +29,7 @@ export function DeleteTeam({
 
                 <button 
                     className="form-button form-cancel-button"
-                    onClick={() => deletePatchTeam.setTeamAction(null)}
+                    onClick={() => deletePatchGoal.setSolutionAction(null)}
                 >
                     Cancel
                 </button>

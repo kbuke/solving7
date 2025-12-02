@@ -16,7 +16,7 @@ function App() {
   const [allTeams, setAllTeams] = useState([])
   const [allTeamMembers, setAllTeamMembers] = useState([])
   const [allDonors, setAllDonors] = useState([])
-  const [loggedUser, setLoggedUser] = useState([])
+  const [loggedUser, setLoggedUser] = useState(null)
 
   useFetch("/api/session", setLoggedUser)
 
@@ -28,6 +28,8 @@ function App() {
   useFetch("/api/sustainabilities", setAllUNSustainableGoals)
   useFetch("/api/homesection", setAllHomeSections)
   useFetch("/api/sustainablesolutions", setAllSustainableSolutions)
+
+  console.log(loggedUser)
 
   const inputContainer = (label, type, placeholder, register, errorMessage) => {
     return(

@@ -58,6 +58,8 @@ export function TeamLogin(){
             }
 
             const data = await res.json()
+
+            appData.setLoggedUser(data)
             
             navigate("/admin")
         } catch(err) {
