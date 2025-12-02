@@ -57,7 +57,15 @@ export function AdminGoals({
             {solutionAction
                 ?<div className="popup-container">
                     {solutionAction === "add"
-                        ? <PostGoal />
+                        ? <PostGoal 
+                            register={register}
+                            handleSubmit={handleSubmit}
+                            errors={errors}
+                            allSolutions={allSolutions}
+                            setAllSolutions={setAllSolutions}
+                            setSolutionAction={setSolutionAction}
+                            inputContainer={appData?.inputContainer}
+                        />
                         : solutionAction === "edit"
                         ? <PatchGoal />
                         :
