@@ -79,7 +79,10 @@ export function AdminHomeSection({
                             errors={errors}
                             reset={reset}
                         />
-                        : <DeleteSection />
+                        : <DeleteSection 
+                            deletePatchSection={deletePatchSection}
+                            handleSubmit={handleSubmit}
+                        />
                     }
                 </div>
                 :
