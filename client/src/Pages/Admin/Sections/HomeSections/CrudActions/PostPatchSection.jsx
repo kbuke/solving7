@@ -36,7 +36,7 @@ export function PostPatchSection({
                         "heading", {
                             required: "Please enter a heading",
                             validate: value => {
-                                const exists = allSections.some(
+                                const exists = allSections?.some(
                                     section => 
                                         section?.heading.toLowerCase() === value?.toLowerCase()
                                 )
