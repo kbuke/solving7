@@ -6,7 +6,10 @@ export function GeneralLayout({
     dataArray,
     setTableAction,
     setSelectedCategoryId,
-    setSelectedCategoryName
+    setSelectedCategoryName,
+    relational,
+    dependantArray,
+    setOtherCategoryId
 }){
     return(
         <div>
@@ -14,17 +17,47 @@ export function GeneralLayout({
                 {title}
             </h1>
 
-            <button onClick={() => setTableAction("add")}>
-                Add {title}
-            </button>
+            {relational 
+                ? <div>
+                    {dataArray?.map(((data, index) => (
+                        <div key={index}>
+                            <div>
+                                <h2>
+                                    {data?.solution}
+                                </h2>
 
-            <AdminTable 
-                tableHeadings={tableHeadings}
-                dataArray={dataArray}
-                setTableAction={setTableAction}
-                setSelectedCategoryId={setSelectedCategoryId}
-                setSelectedCategroyName={setSelectedCategoryName}
-            />
+                                <button onClick={() => {
+                                    setTableAction("add")
+                                    setOtherCategoryId(data.id)
+                                }}>
+                                    Add UN-Goal
+                                </button>
+                            </div>
+
+                            <AdminTable 
+                                tableHeadings={tableHeadings}
+                                dataArray={dependantArray[index]}
+                                setTableAction={setTableAction}
+                                setSelectedCategoryId={setSelectedCategoryId}
+                                relational={relational}
+                            />
+                        </div>
+                    )))}
+                </div>
+                : <div>
+                    <button onClick={() => setTableAction("add")}>
+                        Add {title}
+                    </button>
+
+                    <AdminTable 
+                        tableHeadings={tableHeadings}
+                        dataArray={dataArray}
+                        setTableAction={setTableAction}
+                        setSelectedCategoryId={setSelectedCategoryId}
+                        setSelectedCategroyName={setSelectedCategoryName}
+                    />
+                </div>
+            }
         </div>
     )
 }

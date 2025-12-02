@@ -36,15 +36,24 @@ class SustainableSolutionModel(db.Model, SerializerMixin):
                 raise ValueError(f"Solution {value} is not registered on the application")
         
         # 4 - Check if the relationship is already defined
-        sustainable_id = value if key == "sustainable_id" else self.sustainable_id
-        solution_id = value if key == "solution_id" else self.solution_id
+        if key == "sustainable_id":
+            sustainable_id = value
+            solution_id = self.solution_id
+        else:
+            sustainable_id = self.sustainable_id
+            solution_id = value
 
-        existing_relation = SustainableSolutionModel.query.filter_by(
-            sustainable_id = sustainable_id,
-            solution_id = solution_id
-        ).first()
+        # Only check when BOTH are present
+        if sustainable_id and solution_id:
+            existing_relation = SustainableSolutionModel.query.filter_by(
+                sustainable_id=sustainable_id,
+                solution_id=solution_id
+            ).first()
 
-        if existing_relation and existing_relation.id != self.id:
-            raise ValueError(f"Relationship already exists between Sustainable Goal: {sustainable_id} and Solution: {solution_id}")
+            if existing_relation and existing_relation.id != self.id:
+                raise ValueError(
+                    f"Relationship already exists between Sustainable Goal: {sustainable_id} and Solution: {solution_id}"
+                )
+
         
         return value

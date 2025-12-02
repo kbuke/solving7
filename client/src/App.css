@@ -154,6 +154,13 @@ button{
     ); 
 }
 
+.react-select{
+    width: 400px;
+    color: black;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 
 
 
