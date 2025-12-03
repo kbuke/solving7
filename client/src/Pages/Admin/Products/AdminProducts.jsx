@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { GeneralLayout } from "../Components/GeneralLayout";
 import { PostProduct } from "./CrudActions/PostProduct";
+import { PatchProduct } from "./CrudActions/PatchProduct";
+import { DeleteProduct } from "./CrudActions/DeleteProduct";
 
 export function AdminProducts({
     appData,
@@ -31,6 +33,15 @@ export function AdminProducts({
         }
     ]
 
+    const deletePatchProduct = {
+        selectedProductId: selectedProductId,
+        setSelectedProductId: setSelectedProductId,
+        selectedProductName: selectedProductName,
+        setSelectedProductName: setSelectedProductName,
+        setProductAction: setProductAction,
+        setAllProducts: setAllProducts
+    }
+
     return(
         <div>
             <GeneralLayout 
@@ -54,7 +65,16 @@ export function AdminProducts({
                             setProductAction={setProductAction}
                             inputContainer={appData?.inputContainer}
                         />
-                        : null
+                        : productAction === "Edit"
+                        ? <PatchProduct 
+                            deletePatchProduct={deletePatchProduct}
+                            inputContainer={appData?.inputContainer}
+                            register={register}
+                            handleSubmit={handleSubmit}
+                            errors={errors}
+                            reset={reset}
+                        />
+                        : <DeleteProduct />
                     }
                 </div>
                 : null

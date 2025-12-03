@@ -60,6 +60,7 @@ export function AdminPg() {
         register={register}
         handleSubmit={handleSubmit}
         errors={errors}
+        reset={reset}
       />
     </div>
   ) : (
