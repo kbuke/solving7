@@ -5,8 +5,7 @@ export function AdminTable({
     dataArray,
     setTableAction,
     setSelectedCategoryId,
-    setSelectedCategroyName,
-    relational
+    setSelectedCategroyName
 }){
     const tableButtons = (text, extraClassName, selectedId, selectedName) => {
         return(
@@ -48,10 +47,7 @@ export function AdminTable({
                         ))}
                         <td>
                             <div className="table-button-container">
-                                {relational 
-                                    ? null
-                                    : tableButtons("Edit", "edit-table-button", data.id, data.name)
-                                }
+                                {tableButtons("Edit", "edit-table-button", data.id, data.name)}
 
                                 {tableButtons("Delete", "delete-table-button", data.id, data.name)}
                             </div>

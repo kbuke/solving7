@@ -10,40 +10,35 @@ export function SolutionGoals({
     errors
 }){
     const [solutionGoalAction, setSolutionGoalAction] = useState()
-    const [selectedSolutionGoalId, setSelectedSolutionGoalId] = useState()
-    const [selectedSolutionId, setSelectedSolutionId] = useState()
+    //This is the goals of S7
+    const [goalId, setGoalId] = useState()
+    const [sustainableId, setSustainableId] = useState()
 
-    const allSolutions = appData?.allSolutions
-
-    const allUNSustainableGoals = appData?.allUNSustainableGoals
-    const setAllUNSustainableGoals = appData?.setAllUNSustainableGoals
-
-    const allSustainableSolutions = appData?.allSustainableSolutions
-    const setAllSustainableSolutions = appData?.setAllSustainableSolutions
-
-    const solutionGoalHeadings = [
+    const sustainableGoalHeaders = [
         {
             header: "UN-Goal", accessor: "goal"
         }
     ]
 
-    const solutionGoalArray = allSolutions.map((solution => {
-        const solutionGoals = solution?.sustainable_goals
-        return solutionGoals
-    }))
+    const allUNSustainableGoals= appData?.allUNSustainableGoals
 
-    console.log(solutionGoalAction)
+    const allSustainableSolutions = appData?.allSustainableSolutions
+    const setAllSustainableSolutions = appData?.setAllSustainableSolutions
+
+    console.log(allSustainableSolutions)
 
     return(
-        <div>
+        <>
             <GeneralLayout 
-                title={"Solution - UN Goals"}
-                tableHeadings={solutionGoalHeadings}
-                dataArray={allSolutions}
-                relational={true}
-                dependantArray={solutionGoalArray}
-                setOtherCategoryId={setSelectedSolutionId}
+                title={"UN Goals Achieved"}
+                tableHeadings={sustainableGoalHeaders}
+                dataArray={appData?.allSolutions}
                 setTableAction={setSolutionGoalAction}
+                goalRelation={"unSustainability"}
+                goalDependant={true}
+                allGoals={appData?.allSolutions}
+                setSustainableId={setSustainableId}
+                setGoalId={setGoalId}
             />
 
             {
@@ -53,17 +48,28 @@ export function SolutionGoals({
                             solutionGoalAction === "add"
                                 ? <PostSolutionGoal 
                                     allUNSustainableGoals={allUNSustainableGoals}
-                                    selectedSolutionId={selectedSolutionId}
+                                    selectedSolutionId={goalId}
                                     allSustainableSolutions={allSustainableSolutions}
                                     setAllSustainableSolutions={setAllSustainableSolutions}
                                     setSolutionGoalAction={setSolutionGoalAction}
                                     handleSubmit={handleSubmit}
+                                    sustainableId={sustainableId}
+                                    setSustainableId={setSustainableId}
                                 />
-                                : <DeleteSolutionGoal />
+                                : <DeleteSolutionGoal 
+                                    goalId={goalId}
+                                    sustainableId={sustainableId}
+                                    setSolutionGoalAction={setSolutionGoalAction}
+                                    handleSubmit={handleSubmit}
+                                    allSustainableSolutions={allSustainableSolutions}
+                                    setAllSustainableSolutions={setAllSustainableSolutions}
+                                />
+
                         }
                     </div>
-                    : null
+                    :
+                    null
             }
-       </div>
+        </>
     )
 }

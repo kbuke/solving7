@@ -1,4 +1,5 @@
 import { AdminTable } from "./AdminTable";
+import { GoalTables } from "./GoalTables";
 
 export function GeneralLayout({
     title,
@@ -7,44 +8,57 @@ export function GeneralLayout({
     setTableAction,
     setSelectedCategoryId,
     setSelectedCategoryName,
-    relational,
+    goalDependant,
     dependantArray,
-    setOtherCategoryId
+    setOtherCategoryId,
+    setGoalId,
+    setSustainableId,
+    allGoals,
+    goalRelation
 }){
     return(
-        <div>
+        <>
             <h1>
                 {title}
             </h1>
-
-            {relational 
-                ? <div>
-                    {dataArray?.map(((data, index) => (
+            {goalDependant ?
+                allGoals.map((goal, index) => {
+                    const unGoals = goal?.sustainable_goals
+                    return(
                         <div key={index}>
                             <div>
-                                <h2>
-                                    {data?.solution}
-                                </h2>
+                                <h3>{goal?.solution}</h3>
 
                                 <button onClick={() => {
+                                    setGoalId(goal?.id)
                                     setTableAction("add")
-                                    setOtherCategoryId(data.id)
+                                    setSustainableId(null)
                                 }}>
-                                    Add UN-Goal
+                                    Add UN Sustainable Goal
                                 </button>
                             </div>
 
-                            <AdminTable 
+                            <GoalTables 
                                 tableHeadings={tableHeadings}
-                                dataArray={dependantArray[index]}
+                                dataArray={
+                                    goalRelation==="unSustainability"
+                                        ? unGoals
+                                        : null
+                                }
                                 setTableAction={setTableAction}
-                                setSelectedCategoryId={setSelectedCategoryId}
-                                relational={relational}
+                                setSelectedCategoryId={
+                                    goalRelation==="unSustainability"
+                                        ? setSustainableId
+                                        : null   
+                                }
+                                setGoalId={setGoalId}
+                                goalId = {goal?.id}
                             />
                         </div>
-                    )))}
-                </div>
-                : <div>
+                    )
+                })
+                :
+                <div>
                     <button onClick={() => setTableAction("add")}>
                         Add {title}
                     </button>
@@ -58,6 +72,6 @@ export function GeneralLayout({
                     />
                 </div>
             }
-        </div>
+        </>
     )
 }

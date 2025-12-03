@@ -5,6 +5,7 @@ import { AdminGoals } from "./Sections/Goals/AdminGoals"
 import { useForm } from "react-hook-form"
 import { AdminHomeSection } from "./Sections/HomeSections/AdminHomeSection"
 import { SolutionGoals } from "./Sections/SustainableGoals/SolutionGoals"
+import { AdminProducts } from "./Products/AdminProducts"
 
 export function AdminPg() {
   const appData = useOutletContext()
@@ -48,6 +49,13 @@ export function AdminPg() {
       />
 
       <SolutionGoals
+        appData={appData}
+        register={register}
+        handleSubmit={handleSubmit}
+        errors={errors}
+      />
+
+      <AdminProducts 
         appData={appData}
         register={register}
         handleSubmit={handleSubmit}

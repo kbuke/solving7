@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactSelect from "react-select"
 import { usePost } from "../../../../../Requests/usePost";
 
@@ -8,14 +8,20 @@ export function PostSolutionGoal({
     allSustainableSolutions,
     setAllSustainableSolutions,
     setSolutionGoalAction,
-    handleSubmit
+    handleSubmit,
+    sustainableId,
+    setSustainableId
 }){
-    const [sustainableId, setSustainableId] = useState()
+    // const [sustainableId, setSustainableId] = useState()
+    const [availableGoals, setAvailableGoals] = useState([])
 
-    const availableGoals = allUNSustainableGoals.filter(goal => {
-        const isAlreadyUsed = goal.solutions.some(s => s.id === selectedSolutionId);
-        return !isAlreadyUsed; 
-    });
+    console.log(allUNSustainableGoals)
+
+    useEffect(() => (
+        setAvailableGoals(allUNSustainableGoals.filter((unGoal => 
+            !unGoal.solutions.some(solution => solution.id === selectedSolutionId)
+        )))
+    ), [allSustainableSolutions])
 
     const renderOptions = availableGoals.map(goal => ({
         value: goal?.id,
