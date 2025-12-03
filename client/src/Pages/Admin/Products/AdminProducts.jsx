@@ -74,7 +74,10 @@ export function AdminProducts({
                             errors={errors}
                             reset={reset}
                         />
-                        : <DeleteProduct />
+                        : <DeleteProduct 
+                            deletePatchProduct={deletePatchProduct}
+                            handleSubmit={handleSubmit}
+                        />
                     }
                 </div>
                 : null
