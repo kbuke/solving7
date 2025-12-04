@@ -14,11 +14,17 @@ export function AdminProducts({
     const [productAction, setProductAction] = useState()
     const [selectedProductId, setSelectedProductId] = useState()
     const [selectedProductName, setSelectedProductName] = useState()
+    const [solutionId, setSolutionId] = useState()
 
     const allProducts = appData?.allProducts
     const setAllProducts = appData?.setAllProducts
 
-    console.log(allProducts)
+    const allSolutions = appData?.allSolutions
+
+    const renderMissions = allSolutions?.map(mission => ({
+        value: mission.id,
+        label: mission.solution
+    }))
 
     const productHeadings = [
         {
@@ -64,6 +70,9 @@ export function AdminProducts({
                             setAllProducts={setAllProducts}
                             setProductAction={setProductAction}
                             inputContainer={appData?.inputContainer}
+                            renderMissions={renderMissions}
+                            solutionId={solutionId}
+                            setSolutionId={setSolutionId}
                         />
                         : productAction === "Edit"
                         ? <PatchProduct 
@@ -73,6 +82,9 @@ export function AdminProducts({
                             handleSubmit={handleSubmit}
                             errors={errors}
                             reset={reset}
+                            renderMissions={renderMissions}
+                            solutionId={solutionId}
+                            setSolutionId={setSolutionId}
                         />
                         : <DeleteProduct 
                             deletePatchProduct={deletePatchProduct}

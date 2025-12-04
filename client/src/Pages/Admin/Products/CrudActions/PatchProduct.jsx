@@ -9,7 +9,10 @@ export function PatchProduct({
     register,
     handleSubmit,
     errors,
-    reset
+    reset,
+    renderMissions,
+    solutionId,
+    setSolutionId
 }){
     const [product, setProduct] = useState()
 
@@ -50,6 +53,9 @@ export function PatchProduct({
             register={register}
             errors={errors}
             product={product}
+            renderMissions={renderMissions}
+            solutionId={solutionId}
+            setSolutionId={setSolutionId}
         />
     )
 }

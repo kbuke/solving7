@@ -8,7 +8,10 @@ export function PostPatchProduct({
     inputContainer,
     register,
     errors,
-    product
+    product,
+    renderMissions,
+    solutionId,
+    setSolutionId
 }){
     const patchValue = (defaultValue) => {
         patchOrPost === "patch"
@@ -72,6 +75,14 @@ export function PostPatchProduct({
                     )}, 
                     errors["numberOfProduct"]?.message,
                     patchValue(product?.no_made)
+                )
+            }
+
+            {
+                inputContainer(
+                    "Please enter Mission", "select",
+                    "Please enter Mission", solutionId,
+                    null, renderMissions, setSolutionId, solutionId
                 )
             }
 

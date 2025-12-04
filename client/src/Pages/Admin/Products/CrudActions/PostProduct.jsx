@@ -8,10 +8,18 @@ export function PostProduct({
     allProducts,
     setAllProducts,
     setProductAction,
-    inputContainer
+    inputContainer,
+    renderMissions,
+    solutionId,
+    setSolutionId
 }){
     const handleProductPost = (formData) => {
-        usePost("/api/products", formData, allProducts, setAllProducts, setProductAction)
+        const finalData = {
+            ...formData,
+            solutionId: solutionId
+        }
+        console.log(finalData)
+        usePost("/api/products", finalData, allProducts, setAllProducts, setProductAction)
     }
 
     return(
@@ -24,6 +32,9 @@ export function PostProduct({
             inputContainer={inputContainer}
             register={register}
             errors={errors}
+            renderMissions={renderMissions}
+            solutionId={solutionId}
+            setSolutionId={setSolutionId}
         />
     )
 }

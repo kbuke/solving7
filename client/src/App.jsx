@@ -6,6 +6,8 @@ import { Outlet } from "react-router"
 
 import { FormGroup } from "./Components/FormGroup"
 
+import ReactSelect from "react-select"
+
 function App() {
   const [loading, setLoading] = useState(false)
   const [allSolutions, setAllSolutions] = useState([])
@@ -18,6 +20,8 @@ function App() {
   const [allDonors, setAllDonors] = useState([])
   const [loggedUser, setLoggedUser] = useState(null)
 
+  console.log(allSolutions)
+
   useFetch("/api/session", setLoggedUser)
 
   useFetch("/api/teams", setAllTeams)
@@ -29,7 +33,10 @@ function App() {
   useFetch("/api/homesection", setAllHomeSections)
   useFetch("/api/sustainablesolutions", setAllSustainableSolutions)
 
-  const inputContainer = (label, type, placeholder, register, errorMessage) => {
+  const inputContainer = (
+    label, type, placeholder, register, errorMessage,
+    renderedOptions, setOptionId, chosenId
+  ) => {
     return(
             <div
                 className="form-input-div"
@@ -50,11 +57,17 @@ function App() {
                             placeholder={placeholder}
                             {...register}
                         />
-                    :
-                        <input 
+                    : type === "text"
+                       ? <input 
                             type={type}
                             placeholder={placeholder}
                             {...register}
+                        />
+                        : <ReactSelect 
+                          className="react-select"
+                          options={renderedOptions}
+                          onChange={option => setOptionId(option.value)}
+                          value={renderedOptions.find(option => option.value === chosenId)}
                         />
                     }
                 </div>

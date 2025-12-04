@@ -15,8 +15,6 @@ export function PostSolutionGoal({
     // const [sustainableId, setSustainableId] = useState()
     const [availableGoals, setAvailableGoals] = useState([])
 
-    console.log(allUNSustainableGoals)
-
     useEffect(() => (
         setAvailableGoals(allUNSustainableGoals.filter((unGoal => 
             !unGoal.solutions.some(solution => solution.id === selectedSolutionId)

@@ -20,6 +20,7 @@ export function TeamLogin(){
 
     const appData = useOutletContext()
 
+    const loggedUser = appData?.loggedUser
     const allTeamMembers = appData?.allTeamMembers
 
     const loginGrid = (label, type, setState, placeholder) => {
@@ -40,7 +41,6 @@ export function TeamLogin(){
     }
 
     const handleLogin = async (formData) => {
-        console.log(formData)
         setLoading(true)
         try{
             const res = await fetch("/api/login", {
@@ -80,8 +80,15 @@ export function TeamLogin(){
                     Team-Login
                 </h1>
 
-                {loginGrid("Please enter Email Address", "text", "userEmail", "Please enter email")}
-                {loginGrid("Please enter Password", "password", "userPassword", "Please enter password")}
+                {loggedUser 
+                    ? <h2>You are already signed in.</h2>
+                    :
+
+                    <div className="login-text-container">
+                        {loginGrid("Please enter Email Address", "text", "userEmail", "Please enter email")}
+                        {loginGrid("Please enter Password", "password", "userPassword", "Please enter password")}
+                    </div>
+                }
 
                 <button className="admin-login-button">
                     Login

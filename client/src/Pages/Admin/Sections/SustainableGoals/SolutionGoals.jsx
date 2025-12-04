@@ -25,8 +25,6 @@ export function SolutionGoals({
     const allSustainableSolutions = appData?.allSustainableSolutions
     const setAllSustainableSolutions = appData?.setAllSustainableSolutions
 
-    console.log(allSustainableSolutions)
-
     return(
         <>
             <GeneralLayout 
