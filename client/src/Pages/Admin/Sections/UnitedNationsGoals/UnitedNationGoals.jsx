@@ -63,7 +63,14 @@ export function UnitedNationsGoals({
                             inputContainer={appData?.inputContainer}
                         />
                         : unAction === "Edit"
-                        ? <PatchUnGoal />
+                        ? <PatchUnGoal 
+                            deletePatchUnGoals={deletePatchUnGoals}
+                            inputContainer={appData?.inputContainer}
+                            register={register}
+                            handleSubmit={handleSubmit}
+                            errors={errors}
+                            reset={reset}
+                        />
                         : <DeleteUnGoal 
                             deletePatchUnGoals={deletePatchUnGoals}
                             handleSubmit={handleSubmit}
