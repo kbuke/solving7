@@ -4,7 +4,6 @@ export function useDelete(url, setState, instanceId, setDelete){
     })
         .then(r => {
             if(r.ok){
-                console.log(r)
                 setState(states => states.filter(state => state.id !== instanceId))
             }
         })

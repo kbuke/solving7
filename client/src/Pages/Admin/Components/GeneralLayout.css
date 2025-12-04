@@ -1,0 +1,47 @@
+.admin-main-section-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-admin-section-button{
+    height: 60px;
+    width: 200px;
+    border: none;
+    background-image: linear-gradient(
+        to right,
+        hsl(109, 73%, 44%),
+        hsl(122, 90%, 24%)
+    );
+    
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px;
+
+    border-radius: 0.3em;
+
+    transition: all 0.5s;
+}
+
+.add-admin-section-button:hover{
+    transform: translateY(-8px);
+}
+
+.admin-secondary-header-container{
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    margin-left: 10px;
+    align-content: center;
+}
+
+.add-un-goal{
+    width: 370px;
+}
+
+.secondary-admin-title{
+    text-transform: uppercase;
+    font-size: 23px;
+}

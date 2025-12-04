@@ -1,6 +1,8 @@
 import { AdminTable } from "./AdminTable";
 import { GoalTables } from "./GoalTables";
 
+import "./GeneralLayout.css"
+
 export function GeneralLayout({
     title,
     tableHeadings,
@@ -14,11 +16,12 @@ export function GeneralLayout({
     setGoalId,
     setSustainableId,
     allGoals,
-    goalRelation
+    goalRelation,
+    reset
 }){
     return(
         <>
-            <h1>
+            <h1 className="section-heading">
                 {title}
             </h1>
             {goalDependant ?
@@ -26,15 +29,18 @@ export function GeneralLayout({
                     const unGoals = goal?.sustainable_goals
                     return(
                         <div key={index}>
-                            <div>
-                                <h3>{goal?.solution}</h3>
+                            <div className="admin-secondary-header-container">
+                                <h3 className="secondary-admin-title">{goal?.solution}</h3>
 
                                 <button onClick={() => {
+                                    reset()
                                     setGoalId(goal?.id)
                                     setTableAction("add")
                                     setSustainableId(null)
-                                }}>
-                                    Add UN Sustainable Goal
+                                }}
+                                    className="add-admin-section-button add-un-goal"
+                                >
+                                    Add United Nations Sustainable Goal
                                 </button>
                             </div>
 
@@ -58,8 +64,11 @@ export function GeneralLayout({
                     )
                 })
                 :
-                <div>
-                    <button onClick={() => setTableAction("add")}>
+                <div className="admin-main-section-container">
+                    <button onClick={() => {
+                        setTableAction("add")
+                        reset()
+                    }} className="add-admin-section-button">
                         Add {title}
                     </button>
 

@@ -7,7 +7,8 @@ export function SolutionGoals({
     appData,
     register,
     handleSubmit,
-    errors
+    errors,
+    reset
 }){
     const [solutionGoalAction, setSolutionGoalAction] = useState()
     //This is the goals of S7
@@ -37,6 +38,7 @@ export function SolutionGoals({
                 allGoals={appData?.allSolutions}
                 setSustainableId={setSustainableId}
                 setGoalId={setGoalId}
+                reset={reset}
             />
 
             {

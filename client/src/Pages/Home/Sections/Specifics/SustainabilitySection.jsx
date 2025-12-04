@@ -3,9 +3,14 @@ import unLogo from "../../../../Resources/UN-Icon.png"
 import "./SustainabilitySection.css"
 
 export function SustainabilitySection({
-    appData
+    appData,
+    selectedSustainableGoal,
+    setSelectedSustainableGoal
 }){
     const [goalsAchieved, setGoalsAchieved] = useState()
+    
+
+    console.log(selectedSustainableGoal)
 
     const allUNSustainableGoals = appData.allUNSustainableGoals
 
@@ -21,7 +26,7 @@ export function SustainabilitySection({
     }
 
     return(
-        <div>
+        <div className="specific-container">
             <h3>
                 Currently Solving7 meets {goalsAchieved?.length} of the 17 UN Sustainable goals
             </h3>
@@ -40,6 +45,12 @@ export function SustainabilitySection({
                     >
                         <img 
                             src={unGoalIcon(goal?.id)}
+                            // onClick={() => setSelectedSustainableGoal(goal)}
+                            onClick={() => {
+                                goal?.solutions.length > 0
+                                    ? setSelectedSustainableGoal(goal)
+                                    : null
+                            }}
                         />
                     </div>
                 ))}

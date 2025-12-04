@@ -50,6 +50,7 @@ export function AdminGoals({
                 setTableAction={setSolutionAction}
                 setSelectedCategoryId={setSelectedSolutionId}
                 setSelectedCategoryName={setSelectedSolutionName}
+                reset={reset}
             />
 
             {solutionAction

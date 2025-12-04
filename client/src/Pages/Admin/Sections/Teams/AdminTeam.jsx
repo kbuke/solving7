@@ -46,6 +46,7 @@ export function AdminTeam({
                 setTableAction={setTeamAction}
                 setSelectedCategoryId={setSelectedTeamId}
                 setSelectedCategoryName={setSelectedTeamName}
+                reset={reset}
             />
 
             {teamAction

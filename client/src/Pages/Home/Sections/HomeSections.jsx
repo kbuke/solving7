@@ -1,11 +1,15 @@
 import "./HomeSections.css"
 import { MissionSection } from "./Specifics/MissionSection"
+import { SustainabilityPopUp } from "./Specifics/SustainabilityPopUp"
 import { SustainabilitySection } from "./Specifics/SustainabilitySection"
 import { TeamSection } from "./Specifics/TeamSection"
+import { useState } from "react"
 
 export function HomeSections({
     appData
 }){
+    const [selectedSustainableGoal, setSelectedSustainableGoal] = useState()
+
     const allHomeSections = appData?.allHomeSections
 
     return(
@@ -29,7 +33,20 @@ export function HomeSections({
                         : section?.accessor === "Sustainability"
                         ? <SustainabilitySection 
                             appData={appData}
+                            selectedSustainableGoal={selectedSustainableGoal}
+                            setSelectedSustainableGoal={setSelectedSustainableGoal}
                         />
+                        : null
+                }
+
+                {
+                    selectedSustainableGoal
+                        ? <div className="popup-container">
+                            <SustainabilityPopUp 
+                                selectedSustainableGoal={selectedSustainableGoal}
+                                setSelectedSustainableGoal={setSelectedSustainableGoal}
+                            />
+                        </div>
                         : null
                 }
             </div>

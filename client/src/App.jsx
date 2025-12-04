@@ -20,7 +20,6 @@ function App() {
   const [allDonors, setAllDonors] = useState([])
   const [loggedUser, setLoggedUser] = useState(null)
 
-  console.log(allSolutions)
 
   useFetch("/api/session", setLoggedUser)
 
@@ -79,6 +78,8 @@ function App() {
             </div>
         )
   }
+
+  console.log(allUNSustainableGoals)
 
   return(
     <>

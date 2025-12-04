@@ -56,6 +56,7 @@ export function AdminHomeSection({
                 setTableAction={setSectionAction}
                 setSelectedCategoryId={setSelectedSectionId}
                 setSelectedCategoryName={setSelectedSectionName}
+                reset={reset}
             />
 
             {sectionAction

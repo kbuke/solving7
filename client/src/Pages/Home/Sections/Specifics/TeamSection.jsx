@@ -11,7 +11,7 @@ export function TeamSection({
     return(allTeams.map((team, index) => {
         const teamMembers = team.members
         return(
-            <div key={index} className="team-container">
+            <div key={index} className="specific-container team-container">
                 <h2 className="secondary-header">
                     {team.name}
                 </h2>

@@ -27,6 +27,7 @@ export function PostSolutionGoal({
     }))
 
     const handleSustainableSolutionPost = (formData) => {
+        console.log(formData)
         formData.solutionId = selectedSolutionId
         formData.sustainableId = sustainableId
         console.log(formData)

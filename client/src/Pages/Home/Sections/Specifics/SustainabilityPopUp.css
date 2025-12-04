@@ -1,0 +1,50 @@
+.sustainable-popup-container{
+    background-color: white;
+    width: 95%;
+    height: 95%;
+
+    align-self: center;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    overflow: hidden;
+}
+
+.unGoalImg{
+    height: 100%;
+    width: 100%;
+}
+
+.un-sustainable-info-container{
+    overflow-y: auto;
+}
+
+.close-un-sustainable-button{
+    height: 50px;
+    width: 150px;
+
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+    font-weight: bold;
+
+    color: white;
+
+    background-image: linear-gradient(
+        to right,
+        hsl(0, 72%, 58%),
+        hsl(0, 90%, 33%)
+    );
+
+    border: none;
+
+    border-radius: 0.3rem;
+
+    transition: 0.5s;
+}
+
+.close-un-sustainable-button:hover{
+    transform: translateY(-5px);
+}
+

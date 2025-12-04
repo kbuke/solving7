@@ -22,7 +22,7 @@ export function MissionSection({
     }
 
     return(
-        <div className="solution-grid" style={{"--columns": generateColumns()}}>
+        <div className="specific-containers solution-grid" style={{"--columns": generateColumns()}}>
             {allSolutions.map((solution, index) => (
                 <div
                     className={`solution-card ${

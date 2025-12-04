@@ -5,7 +5,10 @@ import { AdminGoals } from "./Sections/Goals/AdminGoals"
 import { useForm } from "react-hook-form"
 import { AdminHomeSection } from "./Sections/HomeSections/AdminHomeSection"
 import { SolutionGoals } from "./Sections/SustainableGoals/SolutionGoals"
-import { AdminProducts } from "./Products/AdminProducts"
+import { AdminProducts } from "./Sections/Products/AdminProducts"
+
+import "./Admin.css"
+import { UnitedNationsGoals } from "./Sections/UnitedNationsGoals/UnitedNationGoals"
 
 export function AdminPg() {
   const appData = useOutletContext()
@@ -53,9 +56,10 @@ export function AdminPg() {
         register={register}
         handleSubmit={handleSubmit}
         errors={errors}
+        reset={reset}
       />
 
-      <AdminProducts 
+      <AdminProducts
         appData={appData}
         register={register}
         handleSubmit={handleSubmit}
@@ -63,6 +67,13 @@ export function AdminPg() {
         reset={reset}
       />
 
+      <UnitedNationsGoals 
+        appData={appData}
+        register={register}
+        handleSubmit={handleSubmit}
+        errors={errors}
+        reset={reset}
+      />
     </div>
   ) : (
     <h1>You're not allowed here</h1>

@@ -1,0 +1,9 @@
+.no-info-div{
+    border-bottom: solid 1px black;
+}
+
+.no-info-text{
+    margin-left: 15px;
+    text-transform: uppercase;
+    color: hsl(0, 69%, 57%);
+}

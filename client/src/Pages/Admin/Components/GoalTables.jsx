@@ -1,4 +1,4 @@
-import "./AdminTable.css"
+import "./GoalTables.css"
 
 export function GoalTables({
     tableHeadings,
@@ -11,7 +11,9 @@ export function GoalTables({
 }){
     return(
         dataArray.length === 0
-            ? <p>Nothing to display</p>
+            ? <div className="no-info-div">
+                <p className="no-info-text">Nothing to display</p>
+            </div>
             :
             <table
                 className={`admin-table`}
