@@ -1,29 +1,46 @@
-import { usePost } from "../../../../../Requests/usePost"
+import { postData } from "../../../../../Requests/postData"
 import { PostPatchGoal } from "./PostPatchGoal"
+import { useEffect } from "react"
+import { PostPatchInstance } from "../../../Components/PostPatchInstance"
 
 export function PostGoal({
-    register,
-    handleSubmit,
-    errors,
-    allSolutions,
-    setAllSolutions,
-    setSolutionAction,
-    inputContainer,
-}){
+  handleSubmit,
+  allSolutions,
+  setAllSolutions,
+  setSolutionAction,
+  solutionInputs,
+  solutionAction,
+  reset,
+  register,
+  errors
+}) {
+  useEffect(() => {
+      if (!solutionAction) return
+  
+      if (solutionAction === "add") {
+        reset({
+          solution: "",
+          intro: "",
+          img: ""
+        })
+      }
+    }, [solutionAction])
+  
     const handleSolutionPost = (formData) => {
-        usePost("/api/solutions", formData, allSolutions, setAllSolutions, setSolutionAction)
+      console.log(formData)
+      postData("/api/solutions", formData, allSolutions, setAllSolutions, setSolutionAction)
     }
-
-    return(
-        <PostPatchGoal 
-            patchOrPost={"post"}
-            allSolutions={allSolutions}
-            setSolutionAction={setSolutionAction}
-            handleSolutionPost={handleSolutionPost}
-            handleSubmit={handleSubmit}
-            inputContainer={inputContainer}
-            register={register}
-            errors={errors}
-        />
+  
+    return (
+      <PostPatchInstance
+        patchOrPost={"post"}
+        handleInstancePost={handleSolutionPost}
+        handleSubmit={handleSubmit}
+        inputArray={solutionInputs}
+        setInstanceAction={setSolutionAction}
+        reset={reset}
+        register={register}
+        errors={errors}
+      />
     )
 }

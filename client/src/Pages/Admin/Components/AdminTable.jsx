@@ -5,9 +5,10 @@ export function AdminTable({
     dataArray,
     setTableAction,
     setSelectedCategoryId,
-    setSelectedCategroyName
+    setSelectedCategroyName,
+    setPostOrPatch
 }){
-    const tableButtons = (text, extraClassName, selectedId, selectedName) => {
+    const tableButtons = (text, extraClassName, selectedId, selectedName, setPostOrPatch) => {
         return(
             <button 
                 className={`admin-table-button ${extraClassName}`}
@@ -15,6 +16,7 @@ export function AdminTable({
                     setTableAction(text)
                     setSelectedCategoryId(selectedId)
                     setSelectedCategroyName(selectedName)
+                    {text==="Edit"? setPostOrPatch("patch") : null}
                 }}
             >
                 {text}
@@ -47,7 +49,7 @@ export function AdminTable({
                         ))}
                         <td>
                             <div className="table-button-container">
-                                {tableButtons("Edit", "edit-table-button", data.id, data.name)}
+                                {tableButtons("Edit", "edit-table-button", data.id, data.name, setPostOrPatch)}
 
                                 {tableButtons("Delete", "delete-table-button", data.id, data.name)}
                             </div>

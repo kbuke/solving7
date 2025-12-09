@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react";
-import { useFetch } from "../../../../../Requests/useFetch";
 import { usePatch } from "../../../../../Requests/usePatch"
-import { PostPatchTeam } from "./PostPatchTeam";
+import { PostPatchInstance } from "../../../Components/PostPatchInstance";
 
 export function PatchTeam({
     deletePatchTeam,
-    inputContainer,
-    register,
-    handleSubmit, 
-    errors,
-    reset
+    handleSubmit,
+    reset,
+    teamInputs,
+    team,
+    register
 }){
-    const [team, setTeam] = useState()
-
-    useFetch(`/api/teams/${deletePatchTeam?.selectedTeamId}`, setTeam)
 
     useEffect(() => {
         if(team){
@@ -37,16 +33,14 @@ export function PatchTeam({
     }
 
     return(
-        <PostPatchTeam 
+        <PostPatchInstance 
             patchOrPost={"patch"}
-            allTeams={deletePatchTeam?.allTeams}
-            setTeamAction={deletePatchTeam?.setTeamAction}
-            handleTeamPatch={handleTeamPatch}
+            handleInstancePatch={handleTeamPatch}
             handleSubmit={handleSubmit}
-            inputConatiner={inputContainer}
+            inputArray={teamInputs}
+            setInstanceAction={deletePatchTeam?.setTeamAction}
+            reset={reset}
             register={register}
-            errors={errors}
-            team={team}
         />
     )
 }

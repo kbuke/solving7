@@ -1,30 +1,52 @@
-import { usePost } from "../../../../../Requests/usePost"
-import { PostPatchGoal } from "../../Goals/CrudActions/PostPatchGoal"
-import { PostPatchUnGoal } from "./PostPatchUnGoal"
+import { useEffect } from "react"
+import { postData } from "../../../../../Requests/postData"
+import { PostPatchInstance } from "../../../Components/PostPatchInstance"
 
 export function PostUnGoal({
-    register,
-    handleSubmit,
-    errors,
-    allUNSustainableGoals,
-    setAllUNSustainableGoals,
-    setUnAction,
-    inputContainer
-}){
-    const handleUnPost = (formData) => {
-        usePost("/api/sustainabilities", formData, allUNSustainableGoals, setAllUNSustainableGoals, setUnAction)
-    }
+  handleSubmit,
+  allUNSustainableGoals,
+  setAllUNSustainableGoals,
+  setUnAction,
+  unInputs,
+  unAction,
+  reset,
+  register,
+  errors
+}) {
+  console.log(unAction)
+  useEffect(() => {
+    if(!unAction) return; 
 
-    return(
-        <PostPatchUnGoal 
-            patchOrPost={"post"}
-            allUNSustainableGoals={allUNSustainableGoals}
-            setUnAction={setUnAction}
-            handleUnPost={handleUnPost}
-            handleSubmit={handleSubmit}
-            inputConatiner={inputContainer}
-            register={register}
-            errors={errors}
-        />
+    if(unAction === "add"){
+      reset({
+        goal: "",
+        logo: "",
+        img: "",
+        info: ""
+      })
+    }
+  }, [unAction])
+
+  const handleUnPost = (formData) => {
+    postData(
+      "/api/sustainabilities",
+      formData,
+      allUNSustainableGoals,
+      setAllUNSustainableGoals,
+      setUnAction
     )
+  }
+
+  return (
+    <PostPatchInstance 
+      patchOrPost={"post"}
+      handleInstancePost={handleUnPost}
+      handleSubmit={handleSubmit}
+      inputArray={unInputs}
+      setInstanceAction={setUnAction}
+      reset={reset}
+      register={register}
+      errors={errors}
+    />
+  )
 }

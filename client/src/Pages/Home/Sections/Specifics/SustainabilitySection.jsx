@@ -10,8 +10,6 @@ export function SustainabilitySection({
     const [goalsAchieved, setGoalsAchieved] = useState()
     
 
-    console.log(selectedSustainableGoal)
-
     const allUNSustainableGoals = appData.allUNSustainableGoals
 
     useEffect(() => {
@@ -30,30 +28,35 @@ export function SustainabilitySection({
             <h3>
                 Currently Solving7 meets {goalsAchieved?.length} of the 17 UN Sustainable goals
             </h3>
-            <div className="un-wheel">
-                <img 
-                    className="un-icon"
-                    alt="unIcon"
-                    src={unLogo}
-                />
+            <div
+                style={{backgroundImage: `url(https://www.undp.org/sites/g/files/zskgke326/files/styles/scaled_image_large/public/2024-09/sdgs_crosswalk_0.jpg?itok=1T5bEcTn)`}}
+                className="un-goal-bg-container"
+            >
+                <div className="un-wheel">
+                    <img 
+                        className="un-icon"
+                        alt="unIcon"
+                        src={unLogo}
+                    />
 
-                {allUNSustainableGoals.map((goal, index) => (
-                    <div 
-                        className={`slice ${goal?.solutions.length > 0 ? "impact-slice" : ""}`}
-                        style={{ "--i": index }}
-                        key={index}
-                    >
-                        <img 
-                            src={unGoalIcon(goal?.id)}
-                            // onClick={() => setSelectedSustainableGoal(goal)}
-                            onClick={() => {
-                                goal?.solutions.length > 0
-                                    ? setSelectedSustainableGoal(goal)
-                                    : null
-                            }}
-                        />
-                    </div>
-                ))}
+                    {allUNSustainableGoals.map((goal, index) => (
+                        <div 
+                            className={`slice ${goal?.solutions.length > 0 ? "impact-slice" : ""}`}
+                            style={{ "--i": index }}
+                            key={index}
+                        >
+                            <img 
+                                src={unGoalIcon(goal?.id)}
+                                // onClick={() => setSelectedSustainableGoal(goal)}
+                                onClick={() => {
+                                    goal?.solutions.length > 0
+                                        ? setSelectedSustainableGoal(goal)
+                                        : null
+                                }}
+                            />
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )

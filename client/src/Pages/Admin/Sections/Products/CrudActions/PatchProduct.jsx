@@ -1,22 +1,16 @@
 import { usePatch } from "../../../../../Requests/usePatch"
-import { PostPatchProduct } from "./PostPatchProduct"
-import { useState, useEffect } from "react"
-import { useFetch } from "../../../../../Requests/useFetch"
+import { useEffect } from "react"
+import { PostPatchInstance } from "../../../Components/PostPatchInstance"
 
 export function PatchProduct({
   deletePatchProduct,
-  inputContainer,
+  productInputs,
   register,
   handleSubmit,
-  errors,
   reset,
-  renderMissions,
-  solutionId,
-  setSolutionId,
+  product,
+  control
 }) {
-  const [product, setProduct] = useState()
-
-  useFetch(`/api/products/${deletePatchProduct?.selectedProductId}`, setProduct)
 
   useEffect(() => {
     if (product) {
@@ -24,11 +18,13 @@ export function PatchProduct({
         productName: product.name,
         productImg: product.img,
         numberOfProduct: product.no_made,
+        solutionId: product.solution_id
       })
     }
   }, [product, reset])
 
   const handleProductPatch = (formData) => {
+    console.log("patching product....")
     const patchData = {
       productName: formData.productName,
       productImg: formData.productImg,
@@ -45,19 +41,15 @@ export function PatchProduct({
   }
 
   return (
-    <PostPatchProduct
+    <PostPatchInstance 
       patchOrPost={"patch"}
-      allProducts={deletePatchProduct?.allProducts}
-      setProductAction={deletePatchProduct?.setProductAction}
-      handleProductPatch={handleProductPatch}
+      handleInstancePatch={handleProductPatch}
       handleSubmit={handleSubmit}
-      inputContainer={inputContainer}
+      inputArray={productInputs}
+      setInstanceAction={deletePatchProduct?.setProductAction}
+      reset={reset}
       register={register}
-      errors={errors}
-      product={product}
-      renderMissions={renderMissions}
-      solutionId={solutionId}
-      setSolutionId={setSolutionId}
+      control={control}
     />
   )
 }

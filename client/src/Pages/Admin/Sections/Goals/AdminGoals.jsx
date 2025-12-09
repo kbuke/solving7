@@ -4,6 +4,7 @@ import { PostGoal } from "./CrudActions/PostGoal"
 import { PatchGoal } from "./CrudActions/PatchGoal"
 import { DeleteTeam } from "../Teams/CrudActions/DeleteTeam"
 import { DeleteGoal } from "./CrudActions/DeleteGoal"
+import { useFetch } from "../../../../Requests/useFetch"
 
 export function AdminGoals({
     appData,
@@ -15,9 +16,13 @@ export function AdminGoals({
     const [solutionAction, setSolutionAction] = useState()
     const [selectedSolutionId, setSelectedSolutionId] = useState()
     const [selectedSolutionName, setSelectedSolutionName] = useState()
+    const [goalPatchOrPost, setGoalPatchOrPost] = useState()
+    const [goal, setGoal] = useState()
 
     const allSolutions = appData.allSolutions
     const setAllSolutions = appData.setAllSolutions
+
+    useFetch(`api/solutions/${selectedSolutionId}`, setGoal, [selectedSolutionId, allSolutions])
 
     const solutionHeadings = [
         {
@@ -41,6 +46,44 @@ export function AdminGoals({
         setAllSolutions: setAllSolutions
     }
 
+    const solutionInputs = [
+        {
+            label: "Please enter solution",
+            type: "text",
+            placeholder: "Please enter solution",
+            registerOptions: {
+                required: "Please enter a solution",
+                validate: value => {
+                    const exists = allSolutions?.some(
+                        solution => 
+                            solution?.solution.toLowerCase() === value?.toLowerCase() &&
+                            solution.id !== selectedSolutionId
+                    )
+                    return !exists || `${value} is already registered`
+                }
+            },
+            name: "solution"
+        },
+        {
+            label: "Please enter a description for the solution",
+            type: "textarea",
+            placeholder: "Please enter a description for the solution",
+            registerOptions: {
+                required: "Please enter a description"
+            },
+            name: "solutionIntro"
+        },
+        {
+            label: "Please enter a image for the solution",
+            type: "text",
+            placeholder: "Please enter a image for the solution",
+            registerOptions: {
+                required: "Please enter link to an image"
+            },
+            name: "solutionImg"
+        }
+    ]
+
     return(
         <div>
             <GeneralLayout 
@@ -51,28 +94,32 @@ export function AdminGoals({
                 setSelectedCategoryId={setSelectedSolutionId}
                 setSelectedCategoryName={setSelectedSolutionName}
                 reset={reset}
+                setPostOrPatch={setGoalPatchOrPost}
             />
 
             {solutionAction
                 ?<div className="popup-container">
                     {solutionAction === "add"
                         ? <PostGoal 
-                            register={register}
                             handleSubmit={handleSubmit}
-                            errors={errors}
                             allSolutions={allSolutions}
                             setAllSolutions={setAllSolutions}
                             setSolutionAction={setSolutionAction}
-                            inputContainer={appData?.inputContainer}
+                            solutionInputs={solutionInputs}
+                            solutionAction={solutionAction}
+                            reset={reset}
+                            register={register}
+                            errors={errors}
                         />
                         : solutionAction === "Edit"
                         ? <PatchGoal 
                             deletePatchGoal={deletePatchGoal}
-                            inputContainer={appData?.inputContainer}
+                            solutionInputs={solutionInputs}
                             register={register}
                             handleSubmit={handleSubmit}
                             errors={errors}
                             reset={reset}
+                            goal={goal}
                         />
                         :
                         <DeleteGoal 

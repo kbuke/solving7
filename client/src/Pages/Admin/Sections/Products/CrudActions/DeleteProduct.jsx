@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react"
-import { useFetch } from "../../../../../Requests/useFetch"
 import { useDelete } from "../../../../../Requests/useDelete"
+import { DeleteInstance } from "../../../Components/DeleteInstance"
 
 export function DeleteProduct({ deletePatchProduct, handleSubmit }) {
   const handleDeleteProduct = () => {
@@ -13,24 +12,10 @@ export function DeleteProduct({ deletePatchProduct, handleSubmit }) {
   }
 
   return (
-    <form
-      className="admin-form popup-form"
-      onSubmit={handleSubmit(handleDeleteProduct)}
-    >
-      <h1>
-        Confirm Deletion of Product: {deletePatchProduct?.selectedProductName}
-      </h1>
-
-      <div className="form-button-container">
-        <button className="form-button form-submit-button">Delete</button>
-
-        <button
-          className="form-button form-cancel-button"
-          onClick={() => deletePatchGoal.setProductAction(null)}
-        >
-          Cancel
-        </button>
-      </div>
-    </form>
+    <DeleteInstance 
+      handleSubmit={handleSubmit}
+      handleDeleteInstance={handleDeleteProduct}
+      setModelAction={deletePatchProduct?.setProductAction}
+    />
   )
 }

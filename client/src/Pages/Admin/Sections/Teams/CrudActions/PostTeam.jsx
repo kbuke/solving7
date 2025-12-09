@@ -1,29 +1,44 @@
-import { usePost } from "../../../../../Requests/usePost"
-import { PostPatchTeam } from "./PostPatchTeam"
+import { useEffect } from "react"
+import { postData } from "../../../../../Requests/postData"
+import { PostPatchInstance } from "../../../Components/PostPatchInstance"
 
 export function PostTeam({
-    register,
-    handleSubmmit,
-    errors, 
-    allTeams, 
-    setAllTeams, 
-    setTeamAction,
-    inputContainer
-}){
-    const handleTeamPost = (formData) => {
-        usePost("/api/teams", formData, allTeams, setAllTeams, setTeamAction)
-    }
+  handleSubmit,
+  allTeams,
+  setAllTeams,
+  setTeamAction,
+  teamInputs,
+  teamAction,
+  reset,
+  register,
+  errors
+}) {
+  useEffect(() => {
+    if (!teamAction) return
 
-    return(
-        <PostPatchTeam 
-            patchOrPost={"post"}
-            allTeams={allTeams}
-            setTeamAction={setTeamAction}
-            handleTeamPost={handleTeamPost}
-            handleSubmit={handleSubmmit}
-            inputConatiner={inputContainer}
-            register={register}
-            errors={errors}
-        />
-    )   
+    if (teamAction === "add") {
+      reset({
+        intro: "",
+        name: "",
+      })
+    }
+  }, [teamAction])
+
+  const handleTeamPost = (formData) => {
+    console.log(formData)
+    postData("/api/teams", formData, allTeams, setAllTeams, setTeamAction)
+  }
+
+  return (
+    <PostPatchInstance
+      patchOrPost={"post"}
+      handleInstancePost={handleTeamPost}
+      handleSubmit={handleSubmit}
+      inputArray={teamInputs}
+      setInstanceAction={setTeamAction}
+      reset={reset}
+      register={register}
+      errors={errors}
+    />
+  )
 }

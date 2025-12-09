@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { GeneralLayout } from "../../Components/GeneralLayout"
 import { PostSolutionGoal } from "./CrudActions/PostSolutionGoal"
 import { DeleteSolutionGoal } from "./CrudActions/DeleteSolutionGoal"
@@ -8,12 +8,15 @@ export function SolutionGoals({
     register,
     handleSubmit,
     errors,
-    reset
+    reset,
+    control
 }){
     const [solutionGoalAction, setSolutionGoalAction] = useState()
     //This is the goals of S7
     const [goalId, setGoalId] = useState()
     const [sustainableId, setSustainableId] = useState()
+    const [availableGoals, setAvailableGoals] = useState([])
+    const [unSustainableGoalPostOrPatch, setUnSustainableGoalPostOrPatch] = useState()
 
     const sustainableGoalHeaders = [
         {
@@ -25,6 +28,35 @@ export function SolutionGoals({
 
     const allSustainableSolutions = appData?.allSustainableSolutions
     const setAllSustainableSolutions = appData?.setAllSustainableSolutions
+
+    useEffect(() => (
+        setAvailableGoals(
+            allUNSustainableGoals.filter(
+                unGoal => 
+                    !unGoal.solutions.some(
+                        solution => solution.id === goalId
+                    )
+            )
+        )
+    ), [allSustainableSolutions, goalId])
+
+    const renderedUnOptions = [
+        {
+            label: "Please select UN Goal",
+            type: "select",
+            placeholder: "Please select UN Goal",
+            registerOptions: {
+                required: "Please select a UN Goal"
+            },
+            name: "sustainableId",
+            renderedOptions: availableGoals?.map((goal) => ({
+                value: goal?.id,
+                label: goal?.goal
+            })),
+            setOptionId: setSustainableId,
+            chosenId: sustainableId
+        }
+    ]
 
     return(
         <>
@@ -39,6 +71,9 @@ export function SolutionGoals({
                 setSustainableId={setSustainableId}
                 setGoalId={setGoalId}
                 reset={reset}
+                setPostOrPatch={setUnSustainableGoalPostOrPatch}
+                goalId={goalId}
+                sustainableId={sustainableId}
             />
 
             {
@@ -47,14 +82,18 @@ export function SolutionGoals({
                         {
                             solutionGoalAction === "add"
                                 ? <PostSolutionGoal 
-                                    allUNSustainableGoals={allUNSustainableGoals}
-                                    selectedSolutionId={goalId}
+                                    handleSubmit={handleSubmit}
                                     allSustainableSolutions={allSustainableSolutions}
                                     setAllSustainableSolutions={setAllSustainableSolutions}
                                     setSolutionGoalAction={setSolutionGoalAction}
-                                    handleSubmit={handleSubmit}
+                                    renderedUnOptions={renderedUnOptions}
+                                    solutionGoalAction={solutionGoalAction}
+                                    reset={reset}
+                                    register={register}
+                                    errors={errors}
+                                    control={control}
+                                    goalId={goalId}
                                     sustainableId={sustainableId}
-                                    setSustainableId={setSustainableId}
                                 />
                                 : <DeleteSolutionGoal 
                                     goalId={goalId}

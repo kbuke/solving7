@@ -21,7 +21,16 @@ export function SustainabilityPopUp({
 
             <div>
                 <div className="un-sustainable-info-container">
-                    <h1>Test</h1>
+                    <h1>{selectedSustainableGoal?.id} - {selectedSustainableGoal?.goal}</h1>
+
+                    {selectedSustainableGoal?.info
+                        ?.split("\n")
+                        .map((para, index) => (
+                            <p key={index}>
+                                {para}
+                            </p>
+                        ))
+                    }
                 </div>
 
                 <button 

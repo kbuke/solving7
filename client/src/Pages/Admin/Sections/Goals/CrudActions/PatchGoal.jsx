@@ -2,18 +2,17 @@ import { useEffect, useState } from "react";
 import { useFetch } from "../../../../../Requests/useFetch";
 import { usePatch } from "../../../../../Requests/usePatch";
 import { PostPatchGoal } from "./PostPatchGoal";
+import { PostPatchInstance } from "../../../Components/PostPatchInstance";
 
 export function PatchGoal({
     deletePatchGoal,
-    inputContainer,
+    solutionInputs,
     register,
     handleSubmit,
     errors,
-    reset
+    reset,
+    goal
 }){
-    const [goal, setGoal] = useState()
-
-    useFetch(`/api/solutions/${deletePatchGoal?.selectedSolutionId}`, setGoal)
 
     useEffect(() => {
         if(goal){
@@ -40,16 +39,14 @@ export function PatchGoal({
     }
 
     return(
-        <PostPatchGoal 
+        <PostPatchInstance 
             patchOrPost={"patch"}
-            allSolutions={deletePatchGoal?.allSolutions}
-            setSolutionAction={deletePatchGoal?.setSolutionAction}
-            handleSolutionPatch={handleSolutionPatch}
+            handleInstancePatch={handleSolutionPatch}
             handleSubmit={handleSubmit}
-            inputContainer={inputContainer}
+            inputArray={solutionInputs}
+            setInstanceAction={deletePatchGoal?.setSolutionAction}
+            reset={reset}
             register={register}
-            errors={errors}
-            goal={goal}
         />
     )
 }

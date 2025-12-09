@@ -1,4 +1,5 @@
 export function useDelete(url, setState, instanceId, setDelete){
+    console.log(url)
     fetch(url, {
         method: "DELETE"
     })
@@ -7,5 +8,5 @@ export function useDelete(url, setState, instanceId, setDelete){
                 setState(states => states.filter(state => state.id !== instanceId))
             }
         })
-        .then(setDelete(null))
+        .then(() => setDelete(null))
 }

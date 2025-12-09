@@ -3,6 +3,7 @@ import { GeneralLayout } from "../../Components/GeneralLayout"
 import { PostProduct } from "./CrudActions/PostProduct"
 import { PatchProduct } from "./CrudActions/PatchProduct"
 import { DeleteProduct } from "./CrudActions/DeleteProduct"
+import { useFetch } from "../../../../Requests/useFetch"
 
 export function AdminProducts({
   appData,
@@ -10,14 +11,20 @@ export function AdminProducts({
   handleSubmit,
   errors,
   reset,
+  control
 }) {
   const [productAction, setProductAction] = useState()
   const [selectedProductId, setSelectedProductId] = useState()
   const [selectedProductName, setSelectedProductName] = useState()
+  const [productPostOrPatch, setProductPatchOrPost] = useState()
   const [solutionId, setSolutionId] = useState()
 
   const allProducts = appData?.allProducts
   const setAllProducts = appData?.setAllProducts
+
+  const [product, setProduct] = useState()
+  
+  useFetch(`/api/products/${selectedProductId}`, setProduct, [selectedProductId, allProducts])
 
   const allSolutions = appData?.allSolutions
 
@@ -42,6 +49,62 @@ export function AdminProducts({
     },
   ]
 
+  const productInputs = [
+    {
+      label: "Please enter product name",
+      type: "text",
+      placeholder: "Please enter product name",
+      registerOptions: {
+        required: "Please enter a value", 
+        validate: value => {
+          const exists = allProducts?.some(
+            product => 
+              product.name.toLowerCase() === value.toLowerCase() &&
+              product.id != selectedProductId
+          )
+          return !exists || `${value} is already registered`
+        }
+      },
+      name: "productName"
+    },
+
+    {
+      label: "Please enter an image for product",
+      type: "text",
+      placeholder: "Please enter an image for product",
+      registerOptions: {
+        required: "Please enter a value"
+      },
+      name: "productImg"
+    },
+
+    {
+      label: "Please enter how many of said product you have made",
+      type: "text",
+      placeholder: "Please enter how many of saifd product you have made",
+      registerOptions: {
+        required: "Please enter a value"
+      },
+      name: "numberOfProduct"
+    },
+
+    {
+      label: "Please select which pillar this related to",
+      type: "select",
+      placeholder: "Please select which pillar this related to",
+      registerOptions: {
+        required: "Please select a pillar"
+      },
+      name: "solutionId",
+      renderedOptions: allSolutions?.map((solution) => ({
+        value: solution.id,
+        label: solution.solution
+      })),
+      setOptionId: setSolutionId,
+      chosenId: solutionId
+    }
+  ]
+
   const deletePatchProduct = {
     selectedProductId: selectedProductId,
     setSelectedProductId: setSelectedProductId,
@@ -61,34 +124,35 @@ export function AdminProducts({
         setSelectedCategoryId={setSelectedProductId}
         setSelectedCategoryName={setSelectedProductName}
         reset={reset}
+        setPostOrPatch={setProductPatchOrPost}
       />
 
       {productAction ? (
         <div className="popup-container">
           {productAction === "add" ? (
             <PostProduct
-              register={register}
               handleSubmit={handleSubmit}
-              errors={errors}
               allProducts={allProducts}
               setAllProducts={setAllProducts}
               setProductAction={setProductAction}
-              inputContainer={appData?.inputContainer}
-              renderMissions={renderMissions}
+              productInputs={productInputs}
+              productAction={productAction}
+              reset={reset}
+              register={register}
+              errors={errors}
+              control={control}
               solutionId={solutionId}
-              setSolutionId={setSolutionId}
             />
           ) : productAction === "Edit" ? (
             <PatchProduct
               deletePatchProduct={deletePatchProduct}
-              inputContainer={appData?.inputContainer}
+              productInputs={productInputs}
               register={register}
               handleSubmit={handleSubmit}
               errors={errors}
               reset={reset}
-              renderMissions={renderMissions}
-              solutionId={solutionId}
-              setSolutionId={setSolutionId}
+              product={product}
+              control={control}
             />
           ) : (
             <DeleteProduct

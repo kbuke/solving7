@@ -1,4 +1,5 @@
 import { useDelete } from "../../../../../Requests/useDelete"
+import { DeleteInstance } from "../../../Components/DeleteInstance"
 
 export function DeleteTeam({
     deletePatchTeam,
@@ -14,26 +15,10 @@ export function DeleteTeam({
     }
 
     return(
-        <form
-            onSubmit={handleSubmit(handleDeleteTeam)}
-            className="admin-form popup-form"
-        >
-            <h1>
-                Confirm Deletion of Team: {deletePatchTeam.selectedTeamName}
-            </h1>
-
-            <div className="form-button-container">
-                <button className="form-button form-submit-button">
-                    Delete
-                </button>
-
-                <button 
-                    className="form-button form-cancel-button"
-                    onClick={() => deletePatchTeam.setTeamAction(null)}
-                >
-                    Cancel
-                </button>
-            </div>
-        </form>
+        <DeleteInstance 
+            handleSubmit={handleSubmit}
+            handleDeleteInstance={handleDeleteTeam}
+            setModelAction={deletePatchTeam?.setTeamAction}
+        />
     )
 }

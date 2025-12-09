@@ -17,7 +17,8 @@ export function GeneralLayout({
     setSustainableId,
     allGoals,
     goalRelation,
-    reset
+    reset,
+    setPostOrPatch
 }){
     return(
         <>
@@ -37,6 +38,7 @@ export function GeneralLayout({
                                     setGoalId(goal?.id)
                                     setTableAction("add")
                                     setSustainableId(null)
+                                    setPostOrPatch("post")
                                 }}
                                     className="add-admin-section-button add-un-goal"
                                 >
@@ -66,8 +68,9 @@ export function GeneralLayout({
                 :
                 <div className="admin-main-section-container">
                     <button onClick={() => {
-                        setTableAction("add")
                         reset()
+                        setTableAction("add")
+                        setPostOrPatch("post")
                     }} className="add-admin-section-button">
                         Add {title}
                     </button>
@@ -78,6 +81,7 @@ export function GeneralLayout({
                         setTableAction={setTableAction}
                         setSelectedCategoryId={setSelectedCategoryId}
                         setSelectedCategroyName={setSelectedCategoryName}
+                        setPostOrPatch={setPostOrPatch}
                     />
                 </div>
             }

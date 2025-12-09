@@ -9,6 +9,7 @@ import { AdminProducts } from "./Sections/Products/AdminProducts"
 
 import "./Admin.css"
 import { UnitedNationsGoals } from "./Sections/UnitedNationsGoals/UnitedNationGoals"
+import { AdminTeamMembers } from "./Sections/TeamMembers/AdminTeamMembers"
 
 export function AdminPg() {
   const appData = useOutletContext()
@@ -21,6 +22,7 @@ export function AdminPg() {
     handleSubmit,
     formState: { errors },
     reset,
+    control
   } = useForm()
 
   return loggedUser ? (
@@ -43,6 +45,15 @@ export function AdminPg() {
         reset={reset}
       />
 
+      <AdminTeamMembers 
+        appData={appData}
+        register={register}
+        handleSubmit={handleSubmit}
+        errors={errors}
+        reset={reset}
+        control={control}
+      />
+
       <AdminGoals
         appData={appData}
         register={register}
@@ -57,6 +68,7 @@ export function AdminPg() {
         handleSubmit={handleSubmit}
         errors={errors}
         reset={reset}
+        control={control}
       />
 
       <AdminProducts
@@ -65,6 +77,7 @@ export function AdminPg() {
         handleSubmit={handleSubmit}
         errors={errors}
         reset={reset}
+        control={control}
       />
 
       <UnitedNationsGoals 

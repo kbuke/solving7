@@ -18,6 +18,9 @@
 
 .un-sustainable-info-container{
     overflow-y: auto;
+
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .close-un-sustainable-button{

@@ -1,25 +1,40 @@
-import { usePost } from "../../../../../Requests/usePost"
-import { PostPatchProduct } from "./PostPatchProduct"
+import { useEffect } from "react"
+import { postData } from "../../../../../Requests/postData"
+import { PostPatchInstance } from "../../../Components/PostPatchInstance"
 
 export function PostProduct({
-  register,
   handleSubmit,
-  errors,
   allProducts,
   setAllProducts,
   setProductAction,
-  inputContainer,
-  renderMissions,
-  solutionId,
-  setSolutionId,
+  productInputs,
+  productAction,
+  reset,
+  register,
+  errors,
+  control,
+  solutionId
 }) {
+
+  useEffect(() => {
+    if(!productAction) return;
+
+    if(productAction === "add") {
+      reset({
+        productName: "",
+        productImg: "",
+        numberOfProduct: "",
+        solutionId: ""
+      })
+    }
+  }, [productAction])
+
   const handleProductPost = (formData) => {
     const finalData = {
       ...formData,
       solutionId: solutionId,
     }
-    console.log(finalData)
-    usePost(
+    postData(
       "/api/products",
       finalData,
       allProducts,
@@ -29,18 +44,16 @@ export function PostProduct({
   }
 
   return (
-    <PostPatchProduct
+    <PostPatchInstance 
       patchOrPost={"post"}
-      allProducts={allProducts}
-      setProductAction={setProductAction}
-      handleProductPost={handleProductPost}
+      handleInstancePost={handleProductPost}
       handleSubmit={handleSubmit}
-      inputContainer={inputContainer}
+      inputArray={productInputs}
+      setInstanceAction={setProductAction}
+      reset={reset}
       register={register}
       errors={errors}
-      renderMissions={renderMissions}
-      solutionId={solutionId}
-      setSolutionId={setSolutionId}
+      control={control}
     />
   )
 }

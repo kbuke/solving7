@@ -1,21 +1,15 @@
-import { useDeferredValue, useEffect, useState } from "react";
-import { useFetch } from "../../../../../Requests/useFetch";
+import { useEffect } from "react";
 import { usePatch } from "../../../../../Requests/usePatch";
-import { PostPatchGoal } from "../../Goals/CrudActions/PostPatchGoal";
-import { PostPatchUnGoal } from "./PostPatchUnGoal";
+import { PostPatchInstance } from "../../../Components/PostPatchInstance";
 
 export function PatchUnGoal({
     deletePatchUnGoals,
-    inputContainer,
-    register,
+    unInputs,
     handleSubmit,
-    errors,
     reset,
+    unGoal,
+    register
 }){
-    const [unGoal, setUnGoal] = useState()
-
-    useFetch(`/api/sustainabilities/${deletePatchUnGoals?.selectedUnId}`, setUnGoal)
-
     useEffect(() => {
         if(unGoal){
             reset({
@@ -42,16 +36,14 @@ export function PatchUnGoal({
     }
 
     return(
-        <PostPatchUnGoal 
+        <PostPatchInstance 
             patchOrPost={"patch"}
-            allUNSustainableGoals={deletePatchUnGoals?.allUNSustainableGoals}
-            setSolutionAction={deletePatchUnGoals?.setSolutionAction}
-            handleUnPatch={handleUnPatch}
+            handleInstancePatch={handleUnPatch}
             handleSubmit={handleSubmit}
-            inputConatiner={inputContainer}
+            inputArray={unInputs}
+            setInstanceAction={deletePatchUnGoals?.setUnAction}
+            reset={reset}
             register={register}
-            errors={errors}
-            unGoal={unGoal}
         />
     )
 }

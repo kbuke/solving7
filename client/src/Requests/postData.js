@@ -1,6 +1,7 @@
-export function usePost(
+export function postData(
     url, information, prevState, setState, setAction
 ){
+    console.log("I hear you loud and clear")
     fetch(url, {
         method: "POST",
         headers: {
