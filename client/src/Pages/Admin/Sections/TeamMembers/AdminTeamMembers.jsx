@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useFetch } from "../../../../Requests/useFetch";
 import { GeneralLayout } from "../../Components/GeneralLayout";
 import { PostMembers } from "./CRUD Actions/PostMembers";
+import { PatchMembers } from "./CRUD Actions/PatchMembers";
 
 export function AdminTeamMembers({
     appData,
@@ -9,7 +10,8 @@ export function AdminTeamMembers({
     handleSubmit,
     errors,
     reset,
-    control
+    control,
+    loggedUser
 }){
     const [teamMemberAction, setTeamMemberAction] = useState()
     const [selectedMemberId, setSelectedMemberId] = useState()
@@ -154,7 +156,18 @@ export function AdminTeamMembers({
                             control={control}
                             teamId={teamId}
                         />
-                        : null
+                        : teamMemberAction==="Edit"
+                            ?<PatchMembers 
+                                deletePatchMember={deletePatchMember}
+                                memberInputs={memberInputs}
+                                register={register}
+                                handleSubmit={handleSubmit}
+                                reset={reset}
+                                member={member}
+                                control={control}
+                                loggedUser={loggedUser}
+                            />
+                            :null
                     }
                 </div>
                 : null

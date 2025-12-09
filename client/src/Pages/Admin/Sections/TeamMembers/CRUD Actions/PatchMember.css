@@ -1,0 +1,43 @@
+.unauthorized-popup{
+    height: 80%;
+    width: 80%;
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+
+    align-self: center;
+
+    justify-content: center;
+    align-items: center;
+
+    text-transform: uppercase;
+
+    gap: 10px;
+}
+
+.close-unauthorized-button{
+    cursor: pointer;
+    height: 10%;
+    width: 20%;
+    border: none;
+    border-radius: 0.3rem;
+
+    background-image: linear-gradient(
+        to right,
+        hsl(0, 63%, 51%),
+        hsl(0, 91%, 21%)
+    );
+
+    color: white;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    transition: all 0.5s;
+}
+
+.close-unauthorized-button:hover{
+    transform: translateY(-5px);
+}

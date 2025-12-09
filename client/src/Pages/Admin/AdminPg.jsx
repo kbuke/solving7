@@ -52,6 +52,7 @@ export function AdminPg() {
         errors={errors}
         reset={reset}
         control={control}
+        loggedUser={loggedUser}
       />
 
       <AdminGoals

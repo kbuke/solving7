@@ -24,7 +24,6 @@ export function PatchProduct({
   }, [product, reset])
 
   const handleProductPatch = (formData) => {
-    console.log("patching product....")
     const patchData = {
       productName: formData.productName,
       productImg: formData.productImg,

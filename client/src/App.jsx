@@ -19,7 +19,7 @@ function App() {
   const [loggedUser, setLoggedUser] = useState(null)
 
   // --- Fetch Data on Mount ---
-  useFetch("/api/session", setLoggedUser)
+  useFetch("/api/session", setLoggedUser, [allTeamMembers])
   useFetch("/api/teams", setAllTeams)
   useFetch("/api/teammember", setAllTeamMembers)
   useFetch("/api/solutions", setAllSolutions, [allSustainableSolutions, allUNSustainableGoals])
